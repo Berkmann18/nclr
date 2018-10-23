@@ -41,7 +41,7 @@ const dbg = (...data) => log(clr.debug(data.join(' ')) + '\n');
 /**
  * @description Print an output.
  * @param {...*} data Data to print
- * @example out('1 + 1 = ${rpc('1 1 +')}`);
+ * @example out(`1 + 1 = ${rpc('1 1 +')}`);
  * @see log
  */
 const out = (...data) => log(clr.out(data.join(' ')) + '\n');
