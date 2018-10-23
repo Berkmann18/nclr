@@ -132,7 +132,7 @@ Print an output.
 ### Examples
 
 ```javascript
-out('1 + 1 = ${rpc('1 1 +')}`);
+out(`1 + 1 = ${rpc('1 1 +')}`);
 ```
 
 ## inp
