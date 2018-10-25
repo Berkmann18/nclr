@@ -11,6 +11,7 @@ clr.setTheme(require('./src/scheme'));
  * @description STDOUT log.
  * @param {*} data Data to print
  * @example log('Lorem ipsum dolore sit amet');
+ * @returns {boolean} Did it happened?
  */
 const log = (...data) => process.stdout.write(...data);
 
@@ -19,6 +20,7 @@ const log = (...data) => process.stdout.write(...data);
  * @param {...*} data Data to print
  * @example error('Something wrong happened with', new Error(this));
  * @see log
+ * @returns {boolean} Did it happened?
  */
 const error = (...data) => log(clr.err(data.join(' ')) + '\n');
 
@@ -27,6 +29,7 @@ const error = (...data) => log(clr.err(data.join(' ')) + '\n');
  * @param {...*} data Data to print
  * @example info('Welcome John');
  * @see log
+ * @returns {boolean} Did it happened?
  */
 const info = (...data) => log(clr.inf(data.join(' ')) + '\n');
 
@@ -35,6 +38,7 @@ const info = (...data) => log(clr.inf(data.join(' ')) + '\n');
  * @param {...*} data Data to print
  * @example dbg('i=', i);
  * @see log
+ * @returns {boolean} Did it happened?
  */
 const dbg = (...data) => log(clr.debug(data.join(' ')) + '\n');
 
@@ -43,6 +47,7 @@ const dbg = (...data) => log(clr.debug(data.join(' ')) + '\n');
  * @param {...*} data Data to print
  * @example out(`1 + 1 = ${rpc('1 1 +')}`);
  * @see log
+ * @returns {boolean} Did it happened?
  */
 const out = (...data) => log(clr.out(data.join(' ')) + '\n');
 
@@ -51,6 +56,7 @@ const out = (...data) => log(clr.out(data.join(' ')) + '\n');
  * @param {...*} data Data to print
  * @example inp(name);
  * @see log
+ * @returns {boolean} Did it happened?
  */
 const inp = (...data) => log(clr.in(data.join(' ')) + '\n');
 
@@ -59,6 +65,7 @@ const inp = (...data) => log(clr.in(data.join(' ')) + '\n');
  * @param {...*} data Data to print
  * @example warn('The following function is deprecated');
  * @see log
+ * @returns {boolean} Did it happened?
  */
 const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
 
@@ -67,6 +74,7 @@ const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
  * @param {...*} data Data to print
  * @example quest('What is your username?');
  * @see log
+ * @returns {boolean} Did it happened?
  */
 const quest = (...data) => log(clr.quest(data.join(' ')) + '\n');
 

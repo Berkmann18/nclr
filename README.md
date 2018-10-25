@@ -71,6 +71,8 @@ STDOUT log.
 log('Lorem ipsum dolore sit amet');
 ```
 
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
 ## error
 
 -   **See: log**
@@ -86,6 +88,8 @@ Print an error.
 ```javascript
 error('Something wrong happened with', new Error(this));
 ```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
 
 ## info
 
@@ -103,6 +107,8 @@ Print an information.
 info('Welcome John');
 ```
 
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
 ## dbg
 
 -   **See: log**
@@ -118,6 +124,8 @@ Print a debug message.
 ```javascript
 dbg('i=', i);
 ```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
 
 ## out
 
@@ -135,6 +143,8 @@ Print an output.
 out(`1 + 1 = ${rpc('1 1 +')}`);
 ```
 
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
 ## inp
 
 -   **See: log**
@@ -150,6 +160,8 @@ Print an input.
 ```javascript
 inp(name);
 ```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
 
 ## warn
 
@@ -167,6 +179,8 @@ Print a warning.
 warn('The following function is deprecated');
 ```
 
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
 ## quest
 
 -   **See: log**
@@ -182,6 +196,8 @@ Print a question.
 ```javascript
 quest('What is your username?');
 ```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
 
 ## clr
 
