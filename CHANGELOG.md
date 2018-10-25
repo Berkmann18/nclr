@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/Berkmann18/nclr/compare/v1.0.1-0...v1.0.1) (2018-10-25)
+
+
+### Docs
+
+* Typo fix ([79d5690bb717bea8d89f672fda060d16bde367a0](https://github.com/Berkmann18/nclr/commit/79d5690bb717bea8d89f672fda060d16bde367a0))
+
+
+
 ## [1.0.1-0](https://github.com/Berkmann18/nclr/compare/v1.0.0...v1.0.1-0) (2018-10-23)
 
 
