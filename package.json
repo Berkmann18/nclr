@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "fmt": "eslint -c .eslintrc.js *.js src/*.js --fix",
+    "fmt": "eslint -c ./config/.eslintrc.js *.js src/*.js --fix",
     "doc:lint": "documentation lint index.js",
     "doc:md": "documentation build index.js -f md -o DOCUMENTATION.md",
     "doc": "npm run doc:lint && documentation readme index.js -s Documentation",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "cz-adapter-eslint": "^0.1.2",
     "documentation": "^8.1.2",
-    "eslint": "^5.7.0",
+    "eslint": "^5.8.0",
     "eslint-plugin-security": "^1.4.0",
     "jest": "^23.6.0",
     "test-console": "^1.1.0"
