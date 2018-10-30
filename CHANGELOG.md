@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/Berkmann18/nclr/compare/v1.0.1...v1.1.0) (2018-10-30)
+
+
+### New
+
+* Added `extend` ([cc18dd27350937b50e5cc36f139b7d3d159fb81b](https://github.com/Berkmann18/nclr/commit/cc18dd27350937b50e5cc36f139b7d3d159fb81b)), closes [#1](https://github.com/Berkmann18/nclr/issues/1)
+
+
+
 ## [1.0.1](https://github.com/Berkmann18/nclr/compare/v1.0.1-0...v1.0.1) (2018-10-25)
 
 
