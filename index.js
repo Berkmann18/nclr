@@ -1,11 +1,12 @@
 const clr = require('colors/safe');
+let theme = require('./src/theme');
 
 /**
  * @fileoverview Set of functions for coloured logs.
  * @module
  */
 
-clr.setTheme(require('./src/scheme'));
+clr.setTheme(theme);
 
 /**
  * @description STDOUT log.
@@ -22,7 +23,7 @@ const log = (...data) => process.stdout.write(...data);
  * @see log
  * @returns {boolean} Did it happened?
  */
-const error = (...data) => log(clr.err(data.join(' ')) + '\n');
+const error = (...data) => log(clr.error(data.join(' ')) + '\n');
 
 /**
  * @description Print an information.
@@ -31,7 +32,7 @@ const error = (...data) => log(clr.err(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const info = (...data) => log(clr.inf(data.join(' ')) + '\n');
+const info = (...data) => log(clr.info(data.join(' ')) + '\n');
 
 /**
  * @description Print a debug message.
@@ -40,7 +41,7 @@ const info = (...data) => log(clr.inf(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const dbg = (...data) => log(clr.debug(data.join(' ')) + '\n');
+const dbg = (...data) => log(clr.dbg(data.join(' ')) + '\n');
 
 /**
  * @description Print an output.
@@ -58,7 +59,7 @@ const out = (...data) => log(clr.out(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const inp = (...data) => log(clr.in(data.join(' ')) + '\n');
+const inp = (...data) => log(clr.inp(data.join(' ')) + '\n');
 
 /**
  * @description Print a warning.
@@ -78,4 +79,36 @@ const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
  */
 const quest = (...data) => log(clr.quest(data.join(' ')) + '\n');
 
-module.exports = { error, info, dbg, out, inp, warn, quest, log }
+/**
+ * @description Extend the current theme.
+ * @param {{string: (string|string[])}} extension Theme to add
+ * @example <caption>Using extensions as methods:</caption>
+ * const nclr = require('nclr');
+ * nclr.extend({
+ *   suc: ['green', 'underline'],
+ *   data: 'magenta'
+ * });
+ * nclr.suc('Yay!');
+ * nclr.data(42);
+ * @example <caption>Using extensions as functions:</caption>
+ * const nclr = require('nclr');
+ * nclr.extend({
+ *   suc: ['green', 'underline'],
+ *   data: 'magenta'
+ * });
+ * const { suc, data } = nclr;
+ * suc('Yay!');
+ * data(42);
+ * @throws {Error} Invalid extension key
+ */
+const extend = (extension) => {
+  for (let key in extension) {
+    if (!/\w+/.test(key)) throw new Error(`Invalid extension key "${key}"`);
+    theme[key] = extension[key];
+
+    module.exports[key] = (...data) => log(clr[key](data.join(' ')) + '\n');
+  }
+  clr.setTheme(theme);
+};
+
+module.exports = { error, info, dbg, out, inp, warn, quest, log, extend }

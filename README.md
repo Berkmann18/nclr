@@ -50,8 +50,10 @@ Please refer to [that](.github/CONTRIBUTING.md).
 -   [quest](#quest)
     -   [Parameters](#parameters-7)
     -   [Examples](#examples-7)
+-   [extend](#extend)
+    -   [Parameters](#parameters-8)
+    -   [Examples](#examples-8)
 -   [clr](#clr)
--   [clr](#clr-1)
 
 ## index
 
@@ -199,11 +201,44 @@ quest('What is your username?');
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
 
-## clr
+## extend
 
-Colour/style scheme for the CLI.
+Extend the current theme.
 
-Type: {in: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), out: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>, inf: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), err: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), warn: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), debug: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), quest: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}
+### Parameters
+
+-   `extension` **{string: ([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)}** Theme to add
+
+### Examples
+
+Using extensions as methods:
+
+
+```javascript
+const nclr = require('nclr');
+nclr.extend({
+  suc: ['green', 'underline'],
+  data: 'magenta'
+});
+nclr.suc('Yay!');
+nclr.data(42);
+```
+
+Using extensions as functions:
+
+
+```javascript
+const nclr = require('nclr');
+nclr.extend({
+  suc: ['green', 'underline'],
+  data: 'magenta'
+});
+const { suc, data } = nclr;
+suc('Yay!');
+data(42);
+```
+
+-   Throws **[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)** Invalid extension key
 
 ## clr
 
