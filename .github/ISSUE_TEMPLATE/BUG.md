@@ -18,11 +18,11 @@ about: Create a report to help us improve
 <!--How do you think, the issue should be solved ? -->
 
 ## Environment
-- Version: 
-- OS(s): 
-- Browser(s): 
-- Node version: 10.7.0
-- NPM version: 6.2.0   
+-   Version: 
+-   OS(s): 
+-   Browser(s): 
+-   Node version: 10.7.0
+-   NPM version: 6.2.0   
 
 ## Link or repo
 
