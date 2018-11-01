@@ -29,31 +29,34 @@ Please refer to [that](.github/CONTRIBUTING.md).
 -   [log](#log)
     -   [Parameters](#parameters)
     -   [Examples](#examples)
--   [error](#error)
+-   [use](#use)
     -   [Parameters](#parameters-1)
+-   [error](#error)
+    -   [Parameters](#parameters-2)
     -   [Examples](#examples-1)
 -   [info](#info)
-    -   [Parameters](#parameters-2)
+    -   [Parameters](#parameters-3)
     -   [Examples](#examples-2)
 -   [dbg](#dbg)
-    -   [Parameters](#parameters-3)
+    -   [Parameters](#parameters-4)
     -   [Examples](#examples-3)
 -   [out](#out)
-    -   [Parameters](#parameters-4)
+    -   [Parameters](#parameters-5)
     -   [Examples](#examples-4)
 -   [inp](#inp)
-    -   [Parameters](#parameters-5)
+    -   [Parameters](#parameters-6)
     -   [Examples](#examples-5)
 -   [warn](#warn)
-    -   [Parameters](#parameters-6)
+    -   [Parameters](#parameters-7)
     -   [Examples](#examples-6)
 -   [quest](#quest)
-    -   [Parameters](#parameters-7)
+    -   [Parameters](#parameters-8)
     -   [Examples](#examples-7)
 -   [extend](#extend)
-    -   [Parameters](#parameters-8)
+    -   [Parameters](#parameters-9)
     -   [Examples](#examples-8)
 -   [clr](#clr)
+-   [clr](#clr-1)
 
 ## index
 
@@ -74,6 +77,17 @@ log('Lorem ipsum dolore sit amet');
 ```
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
+## use
+
+Colourise something.
+
+### Parameters
+
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the colour in the theme
+-   `data` **...any** Data
+
+Returns **any** Coloured output
 
 ## error
 
@@ -243,3 +257,9 @@ data(42);
 ## clr
 
 CLI colours.
+
+## clr
+
+Colour/style theme for the CLI.
+
+Type: {inp: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), out: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>, info: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), error: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), warn: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), dbg: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), quest: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}

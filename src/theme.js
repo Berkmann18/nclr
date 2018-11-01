@@ -7,7 +7,7 @@
 /**
  * @description Colour/style theme for the CLI.
  * @type {{inp: string, out: string[], info: string, error: string, warn: string, dbg: string, quest: string}}
- * @private
+ * @protected
  */
 module.exports = {
   inp: 'white', //input
