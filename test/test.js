@@ -1,5 +1,5 @@
 const nclr = require('../index');
-const { info, dbg, out, inp, warn, quest, error, log, extend } = nclr;
+const { info, dbg, out, inp, warn, quest, error, log, extend, use } = nclr;
 const stdout = require('test-console').stdout;
 
 const clr = require('colors/safe');
@@ -74,13 +74,46 @@ test('extend', () => {
   extend({
     suc: 'magenta'
   });
-  
+
   nclr.suc(text);
   expect('suc' in nclr).toBeTruthy();
   expect(typeof nclr.suc).toStrictEqual('function');
 
   const res = stdout.inspectSync(() => nclr.suc(text));
   expect(res).toStrictEqual([`\u001b[35m${text}${END}\n`]);
+});
+
+test('use', () => {
+  let result = `\u001b[32m${text}${END}`;
+  const output = stdout.inspectSync(() => process.stdout.write(use('info', text)));
+  expect(output).toStrictEqual([result]);
+  const res = stdout.inspectSync(() => log(use('info', text)));
+  expect(res).toStrictEqual([result]);
+  expect(use('info', text)).toStrictEqual(result);
+});
+
+test('nested use()', () => {
+  let result = `\u001b[32m${text} \u001b[31mError\u001b[32m${END}`;
+  const output = stdout.inspectSync(() => process.stdout.write(use('info', text, use('error', 'Error'))));
+  expect(output).toStrictEqual([result]);
+});
+
+test('info and use', () => {
+  let result = `\u001b[32m${text} \u001b[31mError\u001b[32m${END}`;
+  const output = stdout.inspectSync(() => info(text, use('error', 'Error')));
+  expect(output).toStrictEqual([`${result}\n`]);
+});
+
+test('info and use(use)', () => {
+  let result = `\u001b[32m${text} \u001b[33mMy \u001b[31mdear\u001b[33m\u001b[32m${END}`;
+  const output = stdout.inspectSync(() => info(text, use('warn', 'My', use('error', 'dear'))));
+  expect(output).toStrictEqual([`${result}\n`]);
+});
+
+test('info and use(`${use}`)', () => {
+  let result = `\u001b[32m${text} \u001b[33mMy\u001b[31mDear\u001b[33m\u001b[32m${END}`;
+  const output = stdout.inspectSync(() => info(text, use('warn', `My${use('error', 'Dear')}`)));
+  expect(output).toStrictEqual([`${result}\n`]);
 });
 
 test('Simple overriding with extend()...', () => {
@@ -92,7 +125,7 @@ test('Simple overriding with extend()...', () => {
   expect('info' in clr).toBeTruthy();
   const initialInfo = `\u001b[32m${text}${END}`,
     overridenInfo = `\u001b[35m${text}${END}`;
-  
+
   const outInfo = stdout.inspectSync(() => process.stdout.write(clr.info(text)));
   expect(outInfo).not.toStrictEqual([initialInfo]);
   expect(outInfo).toStrictEqual([overridenInfo]);
@@ -113,7 +146,7 @@ test('Overriding with extend()', () => {
   expect('warn' in clr).toBeTruthy();
   const initialWarn = `\u001b[33m${text}${END}`,
     overrideWarn = `\u001b[4m\u001b[33m${text}${END}\u001b[24m`;
-  
+
   const outWarn = stdout.inspectSync(() => process.stdout.write(clr.warn(text)));
   expect(outWarn).not.toStrictEqual([initialWarn]);
   expect(outWarn).toStrictEqual([overrideWarn]);

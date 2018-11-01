@@ -85,8 +85,8 @@
   "lint-staged": {
     "*.js": [
       "eslint -c ./config/.eslintrc.js --fix",
-      "mocha --exit",
-      "git add"
+      "git add",
+      "jest --bail --findRelatedTests"
     ],
     "*.md": [
       "remark",

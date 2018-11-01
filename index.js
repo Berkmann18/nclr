@@ -16,6 +16,19 @@ clr.setTheme(theme);
  */
 const log = (...data) => process.stdout.write(...data);
 
+const THEME = Object.keys(theme);
+
+/**
+ * @description Colourise something.
+ * @param {string} name Name of the colour in the theme
+ * @param {...*} data Data
+ * @return {*} Coloured output
+ */
+const use = (name, ...data) => {
+  if (THEME.includes(name)) return clr[name](data.join(' '));
+  else throw new Error(`The name ${name} isn't specified in the theme used`);
+};
+
 /**
  * @description Print an error.
  * @param {...*} data Data to print
@@ -111,4 +124,4 @@ const extend = (extension) => {
   clr.setTheme(theme);
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, log, extend }
+module.exports = { error, info, dbg, out, inp, warn, quest, log, extend, use }
