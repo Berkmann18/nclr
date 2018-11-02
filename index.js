@@ -32,6 +32,9 @@ const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data);
  * @param {...*} data Data
  * @return {string} Coloured output
  * @throws {Error} Invalid name
+ * @example let information = use('info', 'Some info styled text');
+ * @example <caption>Nesting</caption>
+ * log('Something', use('warn', 'really ', use('info', 'cool!')));
  */
 const use = (name, ...data) => {
   if (!isValidName(name)) throw new Error(`Invalid name "${name}"`);
