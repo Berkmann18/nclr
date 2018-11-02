@@ -40,42 +40,39 @@ Please refer to [that](.github/CONTRIBUTING.md).
 
 ### Table of Contents
 
-- [nclr](#nclr)
-- [Contributions](#contributions)
-- [Documentation](#documentation)
-    - [Table of Contents](#table-of-contents)
-  - [index](#index)
-  - [log](#log)
-    - [Parameters](#parameters)
-    - [Examples](#examples)
-  - [use](#use)
-    - [Parameters](#parameters-1)
-  - [error](#error)
-    - [Parameters](#parameters-2)
-    - [Examples](#examples-1)
-  - [info](#info)
-    - [Parameters](#parameters-3)
-    - [Examples](#examples-2)
-  - [dbg](#dbg)
-    - [Parameters](#parameters-4)
-    - [Examples](#examples-3)
-  - [out](#out)
-    - [Parameters](#parameters-5)
-    - [Examples](#examples-4)
-  - [inp](#inp)
-    - [Parameters](#parameters-6)
-    - [Examples](#examples-5)
-  - [warn](#warn)
-    - [Parameters](#parameters-7)
-    - [Examples](#examples-6)
-  - [quest](#quest)
-    - [Parameters](#parameters-8)
-    - [Examples](#examples-7)
-  - [extend](#extend)
-    - [Parameters](#parameters-9)
-    - [Examples](#examples-8)
-  - [clr](#clr)
-  - [clr](#clr-1)
+-   [index](#index)
+-   [log](#log)
+    -   [Parameters](#parameters)
+    -   [Examples](#examples)
+-   [use](#use)
+    -   [Parameters](#parameters-1)
+    -   [Examples](#examples-1)
+-   [error](#error)
+    -   [Parameters](#parameters-2)
+    -   [Examples](#examples-2)
+-   [info](#info)
+    -   [Parameters](#parameters-3)
+    -   [Examples](#examples-3)
+-   [dbg](#dbg)
+    -   [Parameters](#parameters-4)
+    -   [Examples](#examples-4)
+-   [out](#out)
+    -   [Parameters](#parameters-5)
+    -   [Examples](#examples-5)
+-   [inp](#inp)
+    -   [Parameters](#parameters-6)
+    -   [Examples](#examples-6)
+-   [warn](#warn)
+    -   [Parameters](#parameters-7)
+    -   [Examples](#examples-7)
+-   [quest](#quest)
+    -   [Parameters](#parameters-8)
+    -   [Examples](#examples-8)
+-   [extend](#extend)
+    -   [Parameters](#parameters-9)
+    -   [Examples](#examples-9)
+-   [clr](#clr)
+-   [clr](#clr-1)
 
 ## index
 
@@ -106,6 +103,18 @@ Colourise something.
 -   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the log in the theme
 -   `data` **...any** Data
 
+### Examples
+
+```javascript
+let information = use('info', 'Some info styled text');
+```
+
+Nesting
+
+
+```javascript
+log('Something', use('warn', 'really ', use('info', 'cool!')));
+```
 
 -   Throws **[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)** Invalid name
 
