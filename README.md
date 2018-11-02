@@ -1,5 +1,6 @@
 # nclr
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2a8e3e98d3bb47f29abbc3df7174675d)](https://app.codacy.com/app/maxieberkmann/nclr?utm_source=github.com&utm_medium=referral&utm_content=Berkmann18/nclr&utm_campaign=Badge_Grade_Dashboard)
 [![NPM](https://nodei.co/npm/nclr.png)](https://nodei.co/npm/nclr/)
 
 [![GitHub package version](https://img.shields.io/github/package-json/v/Berkmann18/nclr.svg)](https://github.com/Berkmann18/nclr)
