@@ -83,10 +83,37 @@ test('extend', () => {
   expect(res).toStrictEqual([`\u001b[35m${text}${END}\n`]);
 });
 
+test('Illigal extend', () => {
+  const myFx = () => console.log('Muhaha!');
+  const ext = () => extend({
+    [myFx]: 'red'
+  });
+  expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
+});
+
+test('Dangerous extend', () => {
+  const harmless = (evt) => console.log('harmless: This=', this, 'evt=', evt);
+  const myFx = (evt) => console.log('myFx: This=', this, 'evt=', evt);
+  const ext = () => extend({
+    [harmless(this)]: 'green',
+    [myFx]: 'red'
+  });
+  expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
+});
+
 test('use', () => {
-  let result = `\u001b[32m${text}${END}`;
+  const result = `\u001b[32m${text}${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text)));
   expect(output).toStrictEqual([result]);
+  const res = stdout.inspectSync(() => log(use('info', text)));
+  expect(res).toStrictEqual([result]);
+  expect(use('info', text)).toStrictEqual(result);
+});
+
+test('use failed', () => {
+  let result = `\u001b[32m${text}${END}`, name = 'spec';
+  const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
+  expect(output).toThrowError(`The name ${name} isn't specified in the theme used`);
   const res = stdout.inspectSync(() => log(use('info', text)));
   expect(res).toStrictEqual([result]);
   expect(use('info', text)).toStrictEqual(result);

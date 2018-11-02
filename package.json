@@ -52,6 +52,7 @@
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
+      "index.js",
       "src/*.js",
       "test/*.js",
       "!**/node_modules/**",

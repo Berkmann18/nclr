@@ -19,12 +19,22 @@ const log = (...data) => process.stdout.write(...data);
 const THEME = Object.keys(theme);
 
 /**
+ * @description Check if the argument is a valid name/key.
+ * @param {*} data Data to check
+ * @returns {boolean} Validity
+ * @private
+ */
+const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data);
+
+/**
  * @description Colourise something.
- * @param {string} name Name of the colour in the theme
+ * @param {string} name Name of the log in the theme
  * @param {...*} data Data
- * @return {*} Coloured output
+ * @return {string} Coloured output
+ * @throws {Error} Invalid name
  */
 const use = (name, ...data) => {
+  if (!isValidName(name)) throw new Error(`Invalid name "${name}"`);
   if (THEME.includes(name)) return clr[name](data.join(' '));
   else throw new Error(`The name ${name} isn't specified in the theme used`);
 };
@@ -116,7 +126,7 @@ const quest = (...data) => log(clr.quest(data.join(' ')) + '\n');
  */
 const extend = (extension) => {
   for (let key in extension) {
-    if (!/\w+/.test(key)) throw new Error(`Invalid extension key "${key}"`);
+    if (!isValidName(key)) throw new Error(`Invalid extension key "${key}"`);
     theme[key] = extension[key];
 
     module.exports[key] = (...data) => log(clr[key](data.join(' ')) + '\n');
