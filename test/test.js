@@ -110,10 +110,19 @@ test('use', () => {
   expect(use('info', text)).toStrictEqual(result);
 });
 
-test('use failed', () => {
+test('use failed 1/2', () => {
   let result = `\u001b[32m${text}${END}`, name = 'spec';
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
   expect(output).toThrowError(`The name ${name} isn't specified in the theme used`);
+  const res = stdout.inspectSync(() => log(use('info', text)));
+  expect(res).toStrictEqual([result]);
+  expect(use('info', text)).toStrictEqual(result);
+});
+
+test('use failed 2/2', () => {
+  let result = `\u001b[32m${text}${END}`, name = () => null;
+  const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
+  expect(output).toThrowError(`Invalid name "${name}"`);
   const res = stdout.inspectSync(() => log(use('info', text)));
   expect(res).toStrictEqual([result]);
   expect(use('info', text)).toStrictEqual(result);
