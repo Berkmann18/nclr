@@ -170,13 +170,19 @@ test('info and use(`${use}`)', () => {
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
-const overrideWithExtendInfo = (initial, overriden) => {
+test('Simple overriding with extend()...', () => {
+  expect('info' in clr).toBeTruthy();
+  extend({
+    info: 'magenta'
+  });
   expect(nclr.info).not.toBe(info);
-  expect('info' in theme).toBeTruthy();
+  expect('info' in clr).toBeTruthy();
+  const initialInfo = `\u001b[32m${text}${END}`,
+    overridenInfo = `\u001b[35m${text}${END}`;
 
-  const outInfo = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
-  expect(outInfo).not.toStrictEqual([initial]);
-  expect(outInfo).toStrictEqual([overriden]);
+  const outInfo = stdout.inspectSync(() => process.stdout.write(clr.info(text)));
+  expect(outInfo).not.toStrictEqual([initialInfo]);
+  expect(outInfo).toStrictEqual([overridenInfo]);
 
   const resOut = stdout.inspectSync(() => info(text));
   expect(resOut).toStrictEqual([`${overriden}\n`]); //Override on the destructured scope
@@ -192,14 +198,6 @@ test('Simple overriding with extend()... 1/2', () => {
   });
 
   overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[35m${text}${END}`);
-});
-
-test('Simple overriding with extend()... 2/2', () => {
-  extend({
-    info: 'fuchsia'
-  });
-
-  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[38;5;201m${text}${END}`);
 });
 
 test('Overriding with extend()', () => {

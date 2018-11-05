@@ -1,5 +1,15 @@
 const chalk = require('chalk');
 
+const theme = {
+  inp: chalk.white,
+  out: chalk.cyan.bold,
+  info: chalk.green,
+  error: chalk.red,
+  warn: chalk.keyword('orange'),
+  dbg: chalk.gray,
+  quest: chalk.blue
+};
+
 /**
  * @description Style theme for the functions.
  * @type {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}}
@@ -185,4 +195,4 @@ const extend = (extension) => {
   THEME = Object.keys(theme);
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, log, extend, use }
+module.exports = { error, info, dbg, out, inp, warn, quest, log, extend, use, getTheme }
