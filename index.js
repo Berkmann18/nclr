@@ -16,6 +16,8 @@ const theme = {
 };
 const THEME = Object.keys(theme);
 
+console.log('level=', chalk.level, 'enabled=', chalk.enabled);
+
 /**
  * @fileoverview Set of functions for coloured logs.
  * @module
