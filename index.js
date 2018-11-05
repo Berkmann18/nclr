@@ -1,5 +1,10 @@
 const chalk = require('chalk');
 
+/**
+ * @description Style theme for the functions.
+ * @type {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}}
+ * @private
+ */
 const theme = {
   inp: chalk.white,
   out: chalk.cyan.bold,
@@ -9,6 +14,7 @@ const theme = {
   dbg: chalk.gray,
   quest: chalk.blue
 };
+const THEME = Object.keys(theme);
 
 /**
  * @fileoverview Set of functions for coloured logs.
@@ -122,6 +128,7 @@ const quest = (...data) => log(theme.quest(data.join(' ')) + '\n');
  * @description Chain strings of an array as a function chain.
  * @param {string[]} arr Array of function names
  * @returns {function} Functional chain
+ * @private
  */
 const arrToFxChain = (arr) => {
   let chain = chalk;
