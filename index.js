@@ -16,6 +16,8 @@ const theme = {
 };
 const THEME = Object.keys(theme);
 
+console.log('level=', chalk.level, 'enabled=', chalk.enabled);
+
 /**
  * @description Style theme for the functions.
  * @type {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}}
