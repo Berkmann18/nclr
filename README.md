@@ -83,6 +83,10 @@ Please refer to [that](.github/CONTRIBUTING.md).
 
 Set of functions for coloured logs.
 
+### Parameters
+
+-   `data` **...any** 
+
 ## log
 
 STDOUT log.
@@ -98,6 +102,12 @@ log('Lorem ipsum dolore sit amet');
 ```
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
+## getTheme
+
+Get the theme.
+
+Returns **{inp: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), out: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), info: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), error: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), warn: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), dbg: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), quest: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)}** Theme
 
 ## use
 
@@ -289,13 +299,3 @@ data(42);
 ```
 
 -   Throws **[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)** Invalid extension key
-
-## clr
-
-CLI colours.
-
-## clr
-
-Colour/style theme for the CLI.
-
-Type: {inp: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), out: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>, info: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), error: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), warn: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), dbg: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), quest: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}
