@@ -1,5 +1,10 @@
 const chalk = require('chalk');
 
+/**
+ * @description Style theme for the functions.
+ * @type {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}}
+ * @private
+ */
 const theme = {
   inp: chalk.white,
   out: chalk.cyan.bold,
@@ -9,6 +14,7 @@ const theme = {
   dbg: chalk.gray,
   quest: chalk.blue
 };
+const THEME = Object.keys(theme);
 
 /**
  * @description Style theme for the functions.
