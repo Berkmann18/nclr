@@ -16,7 +16,16 @@ clr.setTheme(theme);
  */
 const log = (...data) => process.stdout.write(...data);
 
-const THEME = Object.keys(theme);
+let THEME = Object.keys(theme);
+
+/**
+ * @description Update the theme in `colors`
+ * @private
+ */
+const updateTheme = () => {
+  clr.setTheme(theme);
+  THEME = Object.keys(theme);
+}
 
 /**
  * @description Check if the argument is a valid name/key.
@@ -134,7 +143,7 @@ const extend = (extension) => {
 
     module.exports[key] = (...data) => log(clr[key](data.join(' ')) + '\n');
   }
-  clr.setTheme(theme);
+  updateTheme();
 };
 
 module.exports = { error, info, dbg, out, inp, warn, quest, log, extend, use }
