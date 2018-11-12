@@ -14,7 +14,7 @@ const theme = {
   dbg: chalk.gray,
   quest: chalk.blue
 };
-const THEME = Object.keys(theme);
+let THEME = Object.keys(theme);
 
 // console.log('level=', chalk.level, 'enabled=', chalk.enabled);
 if (!chalk.enabled) chalk.enabled = true;
@@ -171,9 +171,9 @@ const extend = (extension) => {
     else {
       theme[key] = (clr in chalk) ? chalk[clr] : chalk.keyword(clr);
     }
-
     module.exports[key] = (...data) => log(theme[key](data.join(' ')) + '\n');
   }
+  THEME = Object.keys(theme);
 };
 
 module.exports = { error, info, dbg, out, inp, warn, quest, log, extend, use, getTheme }
