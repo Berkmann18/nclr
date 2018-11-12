@@ -1,6 +1,6 @@
 {
   "name": "nclr",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Set of pre-defined coloured console logs",
   "main": "index.js",
   "scripts": {

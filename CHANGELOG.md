@@ -1,3 +1,16 @@
+## [1.2.1](https://github.com/Berkmann18/nclr/compare/v1.2.0...v1.2.1) (2018-11-12)
+
+
+### Fix
+
+* Using an extension in `use` ([473a945c537ec0ecd31538f127d113ede4e8dc41](https://github.com/Berkmann18/nclr/commit/473a945c537ec0ecd31538f127d113ede4e8dc41)), closes [#7](https://github.com/Berkmann18/nclr/issues/7)
+
+### Upgrade
+
+* Bump eslint from 5.8.0 to 5.9.0 ([67f2e7ad806ee1b74c4a5b7e30dc4c466dc5256e](https://github.com/Berkmann18/nclr/commit/67f2e7ad806ee1b74c4a5b7e30dc4c466dc5256e))
+
+
+
 # [1.2.0](https://github.com/Berkmann18/nclr/compare/v1.1.0...v1.2.0) (2018-11-02)
 
 
