@@ -227,6 +227,16 @@ test('Extend and use', () => {
   extend({
     cust: 'red'
   });
+  expect('cust' in nclr).toBeTruthy();
+  const result = `\u001b[31m${text}${END}`;
+  const res = stdout.inspectSync(() => log(use('cust', text)));
+  expect(res).toStrictEqual([result]);
+  expect(use('cust', text)).toStrictEqual(result);
+});
+test('Extend and use', () => {
+  extend({
+    cust: 'red'
+  });
 
   expect('cust' in nclr).toBeTruthy();
   const result = `\u001b[31m${text}${END}`;
