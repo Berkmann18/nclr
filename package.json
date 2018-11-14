@@ -3,37 +3,9 @@
   "version": "1.2.1",
   "description": "Set of pre-defined coloured console logs",
   "main": "index.js",
-  "scripts": {
-    "test": "jest",
-    "fmt": "eslint -c ./config/.eslintrc.js *.js --fix",
-    "doc:lint": "documentation lint index.js",
-    "doc:md": "documentation build index.js -f md -o DOCUMENTATION.md",
-    "doc": "npm run doc:lint && documentation readme index.js -s Documentation",
-    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
-    "version": "npm run changelog && git add CHANGELOG.md",
-    "commit": "git-cz",
-    "lint:md": "remark . .github -i ./config/.remarkignore",
-    "lint": "npm run fmt && npm run lint:md",
-    "travis-deploy-once": "travis-deploy-once",
-    "semantic-release": "semantic-release"
+  "directories": {
+    "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Berkmann18/nclr.git"
-  },
-  "keywords": [
-    "CLI",
-    "colour",
-    "colors",
-    "console",
-    "log"
-  ],
-  "author": "Berkmann18",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Berkmann18/nclr/issues"
-  },
-  "homepage": "https://github.com/Berkmann18/nclr#readme",
   "dependencies": {
     "chalk": "^2.4.1"
   },
@@ -52,6 +24,38 @@
     "travis-deploy-once": "^5.0.9",
     "semantic-release": "^15.10.6"
   },
+  "scripts": {
+    "test": "jest",
+    "fmt": "eslint -c ./config/.eslintrc.js *.js --fix",
+    "doc:lint": "documentation lint index.js",
+    "doc:md": "documentation build index.js -f md -o DOCUMENTATION.md",
+    "doc": "npm run doc:lint && documentation readme index.js -s Documentation",
+    "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
+    "version": "npm run changelog && git add CHANGELOG.md",
+    "commit": "git-cz",
+    "lint:md": "remark . .github -i ./config/.remarkignore",
+    "lint": "npm run fmt && npm run lint:md",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Berkmann18@github.com/Berkmann18/nclr.git"
+  },
+  "keywords": [
+    "CLI",
+    "colour",
+    "colors",
+    "color",
+    "console",
+    "log"
+  ],
+  "author": "Berkmann18",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Berkmann18/nclr/issues"
+  },
+  "homepage": "https://github.com/Berkmann18/nclr#readme",
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
