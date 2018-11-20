@@ -17,7 +17,7 @@ const theme = {
 let THEME = Object.keys(theme);
 
 // console.log('level=', chalk.level, 'enabled=', chalk.enabled);
-if (!chalk.enabled) chalk.enabled = true;
+// if (!chalk.enabled) chalk.enabled = true;
 
 /**
  * @description Style theme for the functions.
