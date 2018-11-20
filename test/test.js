@@ -111,22 +111,30 @@ test('use', () => {
   expect(use('info', text)).toStrictEqual(result);
 });
 
-test('use failed 1/2', () => {
-  let result = `\u001b[32m${text}${END}`, name = 'spec';
+const failedUse = ({errMsg, name, text, result = `\u001b[32m${text}${END}`} = {}) => {
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
-  expect(output).toThrowError(`The name ${name} isn't specified in the theme used`);
+  expect(output).toThrowError(errMsg);
   const res = stdout.inspectSync(() => log(use('info', text)));
   expect(res).toStrictEqual([result]);
   expect(use('info', text)).toStrictEqual(result);
+};
+
+test('use failed 1/2', () => {
+  let name = 'spec';
+  failedUse({
+    errMsg: `The name ${name} isn't specified in the theme used`,
+    name,
+    text
+  });
 });
 
 test('use failed 2/2', () => {
-  let result = `\u001b[32m${text}${END}`, name = () => null;
-  const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
-  expect(output).toThrowError(`Invalid name "${name}"`);
-  const res = stdout.inspectSync(() => log(use('info', text)));
-  expect(res).toStrictEqual([result]);
-  expect(use('info', text)).toStrictEqual(result);
+  let name = () => null;
+  failedUse({
+    errMsg: `Invalid name "${name}"`,
+    name,
+    text
+  });
 });
 
 test('nested use()', () => {
@@ -153,46 +161,36 @@ test('info and use(`${use}`)', () => {
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
+const overrideWithExtendInfo = (initial, overriden) => {
+  expect(nclr.info).not.toBe(info);
+  expect('info' in theme).toBeTruthy();
+
+  const outInfo = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
+  expect(outInfo).not.toStrictEqual([initial]);
+  expect(outInfo).toStrictEqual([overriden]);
+
+  const resOut = stdout.inspectSync(() => info(text));
+  expect(resOut).toStrictEqual([`${overriden}\n`]); //Override on the destructured scope
+  const resIn = stdout.inspectSync(() => nclr.info(text));
+  expect(resIn).toStrictEqual([`${overriden}\n`]); //Override on the module's scope
+  expect(nclr.info(text)).toBeTruthy();
+}
+
 test('Simple overriding with extend()... 1/2', () => {
   expect('info' in theme).toBeTruthy();
   extend({
     info: 'magenta'
   });
-  expect(nclr.info).not.toBe(info);
-  expect('info' in theme).toBeTruthy();
-  const initialInfo = `\u001b[32m${text}${END}`,
-    overridenInfo = `\u001b[35m${text}${END}`;
 
-  const outInfo = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
-  expect(outInfo).not.toStrictEqual([initialInfo]);
-  expect(outInfo).toStrictEqual([overridenInfo]);
-
-  const resOut = stdout.inspectSync(() => info(text));
-  expect(resOut).toStrictEqual([`${overridenInfo}\n`]); //Override on the destructured scope
-  const resIn = stdout.inspectSync(() => nclr.info(text));
-  expect(resIn).toStrictEqual([`${overridenInfo}\n`]); //Override on the module's scope
-  expect(nclr.info(text)).toBeTruthy();
+  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[35m${text}${END}`);
 });
 
 test('Simple overriding with extend()... 2/2', () => {
-  expect('info' in theme).toBeTruthy();
   extend({
     info: 'fuchsia'
   });
-  expect(nclr.info).not.toBe(info);
-  expect('info' in theme).toBeTruthy();
-  const initialInfo = `\u001b[32m${text}${END}`,
-    overridenInfo = `\u001b[38;5;201m${text}${END}`;
 
-  const outInfo = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
-  expect(outInfo).not.toStrictEqual([initialInfo]);
-  expect(outInfo).toStrictEqual([overridenInfo]);
-
-  const resOut = stdout.inspectSync(() => info(text));
-  expect(resOut).toStrictEqual([`${overridenInfo}\n`]); //Override on the destructured scope
-  const resIn = stdout.inspectSync(() => nclr.info(text));
-  expect(resIn).toStrictEqual([`${overridenInfo}\n`]); //Override on the module's scope
-  expect(nclr.info(text)).toBeTruthy();
+  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[38;5;201m${text}${END}`);
 });
 
 test('Overriding with extend()', () => {
