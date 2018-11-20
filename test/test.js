@@ -100,10 +100,10 @@ test('Illigal extend', () => {
 });
 
 test('Dangerous extend', () => {
-  const harmless = (evt) => console.log('harmless: This=', this, 'evt=', evt);
+  const harmless = (...evt) => console.log('harmless: This=', this, 'evt=', evt);
   const myFx = (evt) => console.log('myFx: This=', this, 'evt=', evt);
   const ext = () => extend({
-    [harmless(this)]: 'green',
+    [harmless(this, test)]: 'green',
     [myFx]: 'red'
   });
   expect(ext).toThrowError(`Invalid extension key "${myFx}"`);

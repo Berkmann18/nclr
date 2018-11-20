@@ -25,7 +25,7 @@
     "semantic-release": "^15.10.6"
   },
   "scripts": {
-    "test": "jest --color=always",
+    "test": "jest --color",
     "fmt": "eslint -c ./config/.eslintrc.js *.js --fix",
     "doc:lint": "documentation lint index.js",
     "doc:md": "documentation build index.js -f md -o DOCUMENTATION.md",
