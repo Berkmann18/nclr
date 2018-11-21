@@ -102,21 +102,23 @@ test('Dangerous extend', () => {
   expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
 });
 
+const testUse = (text, result) => {
+  const res = stdout.inspectSync(() => log(use('info', text)));
+  expect(res).toStrictEqual([result]);
+  expect(use('info', text)).toStrictEqual(result);
+}
+
 test('use', () => {
   const result = `\u001b[32m${text}${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text)));
   expect(output).toStrictEqual([result]);
-  const res = stdout.inspectSync(() => log(use('info', text)));
-  expect(res).toStrictEqual([result]);
-  expect(use('info', text)).toStrictEqual(result);
+  testUse(text, result);
 });
 
 const failedUse = ({errMsg, name, text, result = `\u001b[32m${text}${END}`} = {}) => {
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
   expect(output).toThrowError(errMsg);
-  const res = stdout.inspectSync(() => log(use('info', text)));
-  expect(res).toStrictEqual([result]);
-  expect(use('info', text)).toStrictEqual(result);
+  testUse(text, result);
 };
 
 test('use failed 1/2', () => {
