@@ -33,7 +33,6 @@ chalk.level = 2;
  */
 const log = (...data) => process.stdout.write(...data);
 
-let THEME = Object.keys(theme);
 
 /**
  * @description Get the theme.
