@@ -35,7 +35,8 @@
   },
   "homepage": "https://github.com/Berkmann18/nclr#readme",
   "dependencies": {
-    "colors": "^1.3.2"
+    "colors": "^1.3.2",
+    "log-symbols": "^2.2.0"
   },
   "devDependencies": {
     "cz-adapter-eslint": "^0.1.2",
