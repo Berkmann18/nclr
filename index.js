@@ -53,7 +53,6 @@ chalk.level = 2;
  */
 const log = (...data) => process.stdout.write(...data);
 
-
 /**
  * @description Get the theme.
  * @returns {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}} Theme
