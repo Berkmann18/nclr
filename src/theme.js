@@ -16,5 +16,6 @@ module.exports = {
   error: 'red', //Error
   warn: 'yellow', //Warning
   dbg: 'grey', //Debug statement
-  quest: 'blue' //Question
+  quest: 'blue', //Question
+  succ: ['green', 'bold'] //Success
 };

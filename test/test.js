@@ -1,5 +1,5 @@
 const nclr = require('../index');
-const { info, dbg, out, inp, warn, quest, error, log, extend, use } = nclr;
+const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use } = nclr;
 const stdout = require('test-console').stdout;
 
 const clr = require('colors/safe');
@@ -65,6 +65,13 @@ test('error', () => {
   expect(error(text)).toBeTruthy();
 });
 
+test('succ', () => {
+  const output = stdout.inspectSync(() => process.stdout.write(clr.succ(text)));
+  expect(output).toStrictEqual([`\u001b[1m\u001b[32m${text}${OUT_END}`]);
+  const res = stdout.inspectSync(() => succ(text));
+  expect(res).toStrictEqual([`\u001b[1m\u001b[32m${text}${OUT_END}\n`]);
+  expect(succ(text)).toBeTruthy();
+});
 test('log', () => {
   const output = stdout.inspectSync(() => log(text));
   expect(output).toStrictEqual([text]);

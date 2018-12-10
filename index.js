@@ -115,6 +115,15 @@ const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
 const quest = (...data) => log(clr.quest(data.join(' ')) + '\n');
 
 /**
+ * @description Print a success log.
+ * @param {...*} data Data to print
+ * @example succ('Achievement unlocked');
+ * @see log
+ * @returns {boolean} Did it happened?
+ */
+const succ = (...data) => log(clr.succ(data.join(' ')) + '\n');
+
+/**
  * @description Extend the current theme.
  * @param {{string: (string|string[])}} extension Theme to add
  * @example <caption>Using extensions as methods:</caption>
@@ -146,4 +155,4 @@ const extend = (extension) => {
   updateTheme();
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, log, extend, use }
+module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use }
