@@ -1,5 +1,5 @@
 const clr = require('colors/safe'),
-  lsym = require('log-symbols');
+  fig = require('figures');
 let theme = require('./src/theme');
 
 /**
@@ -59,7 +59,7 @@ const use = (name, ...data) => {
  * @see log
  * @returns {boolean} Did it happened?
  */
-const error = (...data) => log(`${lsym.error} ${clr.error(data.join(' '))}\n`);
+const error = (...data) => log(`${clr.error(fig.cross + ' ' + data.join(' '))}\n`);
 
 /**
  * @description Print an information.
@@ -68,7 +68,7 @@ const error = (...data) => log(`${lsym.error} ${clr.error(data.join(' '))}\n`);
  * @see log
  * @returns {boolean} Did it happened?
  */
-const info = (...data) => log(`${lsym.info} ${clr.info(data.join(' '))}\n`);
+const info = (...data) => log(`${clr.info(fig.info + ' ' + data.join(' '))}\n`);
 
 /**
  * @description Print a debug message.
@@ -104,7 +104,7 @@ const inp = (...data) => log(clr.inp(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const warn = (...data) => log(`${lsym.warning} ${clr.warn(data.join(' '))}\n`);
+const warn = (...data) => log(`${clr.warn(fig.warning + ' ' + data.join(' '))}\n`);
 
 /**
  * @description Print a question.
@@ -113,7 +113,7 @@ const warn = (...data) => log(`${lsym.warning} ${clr.warn(data.join(' '))}\n`);
  * @see log
  * @returns {boolean} Did it happened?
  */
-const quest = (...data) => log(clr.quest(data.join(' ')) + '\n');
+const quest = (...data) => log(clr.quest(fig.questionMarkPrefix + ' ' + data.join(' ')) + '\n');
 
 /**
  * @description Print a success log.
