@@ -41,43 +41,42 @@ Please refer to [that](.github/CONTRIBUTING.md).
 
 ### Table of Contents
 
-- [nclr](#nclr)
-- [Contributions](#contributions)
-- [Documentation](#documentation)
-    - [Table of Contents](#table-of-contents)
-  - [index](#index)
-  - [log](#log)
-    - [Parameters](#parameters)
-    - [Examples](#examples)
-  - [use](#use)
-    - [Parameters](#parameters-1)
-    - [Examples](#examples-1)
-  - [error](#error)
-    - [Parameters](#parameters-2)
-    - [Examples](#examples-2)
-  - [info](#info)
-    - [Parameters](#parameters-3)
-    - [Examples](#examples-3)
-  - [dbg](#dbg)
-    - [Parameters](#parameters-4)
-    - [Examples](#examples-4)
-  - [out](#out)
-    - [Parameters](#parameters-5)
-    - [Examples](#examples-5)
-  - [inp](#inp)
-    - [Parameters](#parameters-6)
-    - [Examples](#examples-6)
-  - [warn](#warn)
-    - [Parameters](#parameters-7)
-    - [Examples](#examples-7)
-  - [quest](#quest)
-    - [Parameters](#parameters-8)
-    - [Examples](#examples-8)
-  - [extend](#extend)
-    - [Parameters](#parameters-9)
-    - [Examples](#examples-9)
-  - [clr](#clr)
-  - [clr](#clr-1)
+-   [index](#index)
+-   [log](#log)
+    -   [Parameters](#parameters)
+    -   [Examples](#examples)
+-   [use](#use)
+    -   [Parameters](#parameters-1)
+    -   [Examples](#examples-1)
+-   [error](#error)
+    -   [Parameters](#parameters-2)
+    -   [Examples](#examples-2)
+-   [info](#info)
+    -   [Parameters](#parameters-3)
+    -   [Examples](#examples-3)
+-   [dbg](#dbg)
+    -   [Parameters](#parameters-4)
+    -   [Examples](#examples-4)
+-   [out](#out)
+    -   [Parameters](#parameters-5)
+    -   [Examples](#examples-5)
+-   [inp](#inp)
+    -   [Parameters](#parameters-6)
+    -   [Examples](#examples-6)
+-   [warn](#warn)
+    -   [Parameters](#parameters-7)
+    -   [Examples](#examples-7)
+-   [quest](#quest)
+    -   [Parameters](#parameters-8)
+    -   [Examples](#examples-8)
+-   [succ](#succ)
+    -   [Parameters](#parameters-9)
+    -   [Examples](#examples-9)
+-   [extend](#extend)
+    -   [Parameters](#parameters-10)
+    -   [Examples](#examples-10)
+-   [clr](#clr)
+-   [clr](#clr-1)
 
 ## index
 
@@ -247,6 +246,24 @@ Print a question.
 
 ```javascript
 quest('What is your username?');
+```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
+## succ
+
+-   **See: log**
+
+Print a success log.
+
+### Parameters
+
+-   `data` **...any** Data to print
+
+### Examples
+
+```javascript
+succ('Achievement unlocked');
 ```
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
