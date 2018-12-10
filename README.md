@@ -254,7 +254,7 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 -   **See: log**
 
-Print a success log.
+Print a success.
 
 ### Parameters
 
