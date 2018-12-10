@@ -12,10 +12,10 @@
 module.exports = {
   inp: 'white', //input
   out: ['cyan', 'bold'], //Output
-  info: 'green', //Information
+  info: 'cyan', //Information
   error: 'red', //Error
   warn: 'yellow', //Warning
   dbg: 'grey', //Debug statement
   quest: 'blue', //Question
-  succ: ['green', 'bold'] //Success
+  succ: 'green' //Success
 };

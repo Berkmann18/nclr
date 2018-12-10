@@ -12,9 +12,9 @@ const text = 'Hello',
 
 test('info', () => {
   const output = stdout.inspectSync(() => process.stdout.write(clr.info(text)));
-  expect(output).toStrictEqual([`\u001b[32m${text}${END}`]);
+  expect(output).toStrictEqual([`\u001b[36m${text}${END}`]);
   const res = stdout.inspectSync(() => info(text));
-  expect(res).toStrictEqual([`\u001b[32m${fig.info} ${text}${END}\n`]);
+  expect(res).toStrictEqual([`\u001b[36m${fig.info} ${text}${END}\n`]);
   expect(info(text)).toBeTruthy();
 });
 
@@ -68,11 +68,12 @@ test('error', () => {
 
 test('succ', () => {
   const output = stdout.inspectSync(() => process.stdout.write(clr.succ(text)));
-  expect(output).toStrictEqual([`\u001b[1m\u001b[32m${text}${OUT_END}`]);
+  expect(output).toStrictEqual([`\u001b[32m${text}${END}`]);
   const res = stdout.inspectSync(() => succ(text));
-  expect(res).toStrictEqual([`\u001b[1m\u001b[32m${text}${OUT_END}\n`]);
+  expect(res).toStrictEqual([`\u001b[32m${fig.tick} ${text}${END}\n`]);
   expect(succ(text)).toBeTruthy();
 });
+
 test('log', () => {
   const output = stdout.inspectSync(() => log(text));
   expect(output).toStrictEqual([text]);
@@ -110,7 +111,7 @@ test('Dangerous extend', () => {
 });
 
 test('use', () => {
-  const result = `\u001b[32m${text}${END}`;
+  const result = `\u001b[36m${text}${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text)));
   expect(output).toStrictEqual([result]);
   const res = stdout.inspectSync(() => log(use('info', text)));
@@ -119,7 +120,7 @@ test('use', () => {
 });
 
 test('use failed 1/2', () => {
-  let result = `\u001b[32m${text}${END}`, name = 'spec';
+  let result = `\u001b[36m${text}${END}`, name = 'spec';
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
   expect(output).toThrowError(`The name ${name} isn't specified in the theme used`);
   const res = stdout.inspectSync(() => log(use('info', text)));
@@ -128,7 +129,7 @@ test('use failed 1/2', () => {
 });
 
 test('use failed 2/2', () => {
-  let result = `\u001b[32m${text}${END}`, name = () => null;
+  let result = `\u001b[36m${text}${END}`, name = () => null;
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
   expect(output).toThrowError(`Invalid name "${name}"`);
   const res = stdout.inspectSync(() => log(use('info', text)));
@@ -137,25 +138,25 @@ test('use failed 2/2', () => {
 });
 
 test('nested use()', () => {
-  let result = `\u001b[32m${text} \u001b[31mError\u001b[32m${END}`;
+  let result = `\u001b[36m${text} \u001b[31mError\u001b[36m${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text, use('error', 'Error'))));
   expect(output).toStrictEqual([result]);
 });
 
 test('info and use', () => {
-  let result = `\u001b[32m${fig.info} ${text} \u001b[31mError\u001b[32m${END}`;
+  let result = `\u001b[36m${fig.info} ${text} \u001b[31mError\u001b[36m${END}`;
   const output = stdout.inspectSync(() => info(text, use('error', 'Error')));
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
 test('info and use(use)', () => {
-  let result = `\u001b[32m${fig.info} ${text} \u001b[33mMy \u001b[31mdear\u001b[33m\u001b[32m${END}`;
+  let result = `\u001b[36m${fig.info} ${text} \u001b[33mMy \u001b[31mdear\u001b[33m\u001b[36m${END}`;
   const output = stdout.inspectSync(() => info(text, use('warn', 'My', use('error', 'dear'))));
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
 test('info and use(`${use}`)', () => {
-  let result = `\u001b[32m${fig.info} ${text} \u001b[33mMy\u001b[31mDear\u001b[33m\u001b[32m${END}`;
+  let result = `\u001b[36m${fig.info} ${text} \u001b[33mMy\u001b[31mDear\u001b[33m\u001b[36m${END}`;
   const output = stdout.inspectSync(() => info(text, use('warn', `My${use('error', 'Dear')}`)));
   expect(output).toStrictEqual([`${result}\n`]);
 });

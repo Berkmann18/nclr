@@ -116,13 +116,13 @@ const warn = (...data) => log(`${clr.warn(fig.warning + ' ' + data.join(' '))}\n
 const quest = (...data) => log(clr.quest(fig.questionMarkPrefix + ' ' + data.join(' ')) + '\n');
 
 /**
- * @description Print a success log.
+ * @description Print a success.
  * @param {...*} data Data to print
  * @example succ('Achievement unlocked');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const succ = (...data) => log(clr.succ(data.join(' ')) + '\n');
+const succ = (...data) => log(clr.succ(fig.tick + ' ' + data.join(' ')) + '\n');
 
 /**
  * @description Extend the current theme.
