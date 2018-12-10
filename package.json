@@ -12,7 +12,6 @@
     "changelog": "conventional-changelog -p eslint -i CHANGELOG.md -s -r 0",
     "version": "npm run changelog && git add CHANGELOG.md",
     "commit": "git-cz",
-    "precommit": "lint-staged",
     "lint:md": "remark . .github -i ./config/.remarkignore",
     "lint": "npm run fmt && npm run lint:md",
     "travis-deploy-once": "travis-deploy-once",
@@ -91,5 +90,10 @@
       "remark",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
