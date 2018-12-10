@@ -8,11 +8,12 @@ const chalk = require('chalk');
 const theme = {
   inp: chalk.white,
   out: chalk.cyan.bold,
-  info: chalk.green,
+  info: chalk.blueBright,
   error: chalk.red,
   warn: chalk.keyword('orange'),
   dbg: chalk.gray,
-  quest: chalk.blue
+  quest: chalk.blue,
+  succ: chalk.green
 };
 let THEME = Object.keys(theme);
 
@@ -127,6 +128,15 @@ const warn = (...data) => log(theme.warn(data.join(' ')) + '\n');
 const quest = (...data) => log(theme.quest(data.join(' ')) + '\n');
 
 /**
+ * @description Print a success.
+ * @param {...*} data Data to print
+ * @example succ('Achievement unlocked');
+ * @see log
+ * @returns {boolean} Did it happened?
+ */
+const succ = (...data) => log(theme.succ(data.join(' ')) + '\n');
+
+/**
  * @description Chain strings of an array as a function chain.
  * @param {string[]} arr Array of function names
  * @returns {function} Functional chain
@@ -175,4 +185,4 @@ const extend = (extension) => {
   THEME = Object.keys(theme);
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, log, extend, use, getTheme }
+module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use, getTheme }
