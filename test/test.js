@@ -5,7 +5,6 @@ const stdout = require('test-console').stdout,
 
 const theme = nclr.getTheme();
 
-
 const text = 'Hello',
   END = '\u001b[39m',
   OUT_END = '\u001b[22m\u001b[39m';
@@ -171,26 +170,19 @@ test('info and use(`${use}`)', () => {
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
-test('Simple overriding with extend()...', () => {
-  expect('info' in clr).toBeTruthy();
-  extend({
-    info: 'magenta'
-  });
+const overrideWithExtendInfo = (initial, overriden) => {
   expect(nclr.info).not.toBe(info);
-  expect('info' in clr).toBeTruthy();
-  const initialInfo = `\u001b[32m${text}${END}`,
-    overridenInfo = `\u001b[35m${text}${END}`;
-
-  const outInfo = stdout.inspectSync(() => process.stdout.write(clr.info(text)));
-  expect(outInfo).not.toStrictEqual([initialInfo]);
-  expect(outInfo).toStrictEqual([overridenInfo]);
+  expect('info' in theme).toBeTruthy();
+  const outInfo = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
+  expect(outInfo).not.toStrictEqual([initial]);
+  expect(outInfo).toStrictEqual([overriden]);
 
   const resOut = stdout.inspectSync(() => info(text));
   expect(resOut).toStrictEqual([`${overriden}\n`]); //Override on the destructured scope
   const resIn = stdout.inspectSync(() => nclr.info(text));
   expect(resIn).toStrictEqual([`${overriden}\n`]); //Override on the module's scope
   expect(nclr.info(text)).toBeTruthy();
-}
+};
 
 test('Simple overriding with extend()... 1/2', () => {
   expect('info' in theme).toBeTruthy();
@@ -199,6 +191,14 @@ test('Simple overriding with extend()... 1/2', () => {
   });
 
   overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[35m${text}${END}`);
+});
+
+test('Simple overriding with extend()... 2/2', () => {
+  extend({
+    info: 'fuchsia'
+  });
+
+  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[38;5;201m${text}${END}`);
 });
 
 test('Overriding with extend()', () => {

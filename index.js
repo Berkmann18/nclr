@@ -22,26 +22,6 @@ chalk.enabled = true;
 chalk.level = 2;
 
 /**
- * @description Style theme for the functions.
- * @type {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}}
- * @private
- */
-const theme = {
-  inp: chalk.white,
-  out: chalk.cyan.bold,
-  info: chalk.green,
-  error: chalk.red,
-  warn: chalk.keyword('orange'),
-  dbg: chalk.gray,
-  quest: chalk.blue
-};
-let THEME = Object.keys(theme);
-
-console.log('level=', chalk.level, 'enabled=', chalk.enabled);
-chalk.enabled = true;
-chalk.level = 2;
-
-/**
  * @fileoverview Set of functions for coloured logs.
  * @module
  */
@@ -56,7 +36,7 @@ const log = (...data) => process.stdout.write(...data);
 
 /**
  * @description Get the theme.
- * @returns {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}} Theme
+ * @returns {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function, succ: function}} Theme
  */
 const getTheme = () => theme;
 
@@ -169,15 +149,6 @@ const arrToFxChain = (arr) => {
   }
   return chain;
 };
-
-/**
- * @description Print a success log.
- * @param {...*} data Data to print
- * @example succ('Achievement unlocked');
- * @see log
- * @returns {boolean} Did it happened?
- */
-const succ = (...data) => log(clr.succ(data.join(' ')) + '\n');
 
 /**
  * @description Extend the current theme.
