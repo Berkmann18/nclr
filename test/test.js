@@ -5,6 +5,7 @@ const stdout = require('test-console').stdout,
 
 const theme = nclr.getTheme();
 
+
 const text = 'Hello',
   END = '\u001b[39m',
   OUT_END = '\u001b[22m\u001b[39m';
