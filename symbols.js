@@ -1,9 +1,10 @@
-const clr = require('colors/safe');
-const theme = require('./src/theme'),
+const clr = require('colors/safe'),
+  fig = require('figures');
+let theme = require('./src/theme'),
   { log, use, isValidName, updateTheme } = require('./src/lib');
 
 /**
- * @fileoverview Set of functions for coloured logs.
+ * @fileoverview Set of functions for coloured logs with symbols.
  * @module
  */
 
@@ -14,7 +15,7 @@ const theme = require('./src/theme'),
  * @see log
  * @returns {boolean} Did it happened?
  */
-const error = (...data) => log(clr.error(data.join(' ')) + '\n');
+const error = (...data) => log(`${clr.error(fig.cross + ' ' + data.join(' '))}\n`);
 
 /**
  * @description Print an information.
@@ -23,7 +24,7 @@ const error = (...data) => log(clr.error(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const info = (...data) => log(clr.info(data.join(' ')) + '\n');
+const info = (...data) => log(`${clr.info(fig.info + ' ' + data.join(' '))}\n`);
 
 /**
  * @description Print a debug message.
@@ -59,7 +60,7 @@ const inp = (...data) => log(clr.inp(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
+const warn = (...data) => log(`${clr.warn(fig.warning + ' ' + data.join(' '))}\n`);
 
 /**
  * @description Print a question.
@@ -68,16 +69,16 @@ const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const quest = (...data) => log(clr.quest(data.join(' ')) + '\n');
+const quest = (...data) => log(clr.quest(fig.questionMarkPrefix + ' ' + data.join(' ')) + '\n');
 
 /**
- * @description Print a success log.
+ * @description Print a success.
  * @param {...*} data Data to print
  * @example succ('Achievement unlocked');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const succ = (...data) => log(clr.succ(data.join(' ')) + '\n');
+const succ = (...data) => log(clr.succ(fig.tick + ' ' + data.join(' ')) + '\n');
 
 /**
  * @description Extend the current theme.
