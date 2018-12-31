@@ -42,87 +42,51 @@ Please refer to [that](.github/CONTRIBUTING.md).
 ### Table of Contents
 
 -   [index](#index)
--   [log](#log)
     -   [Parameters](#parameters)
-    -   [Examples](#examples)
--   [use](#use)
-    -   [Parameters](#parameters-1)
-    -   [Examples](#examples-1)
 -   [error](#error)
-    -   [Parameters](#parameters-2)
-    -   [Examples](#examples-2)
+    -   [Parameters](#parameters-1)
+    -   [Examples](#examples)
 -   [info](#info)
-    -   [Parameters](#parameters-3)
-    -   [Examples](#examples-3)
+    -   [Parameters](#parameters-2)
+    -   [Examples](#examples-1)
 -   [dbg](#dbg)
-    -   [Parameters](#parameters-4)
-    -   [Examples](#examples-4)
+    -   [Parameters](#parameters-3)
+    -   [Examples](#examples-2)
 -   [out](#out)
-    -   [Parameters](#parameters-5)
-    -   [Examples](#examples-5)
+    -   [Parameters](#parameters-4)
+    -   [Examples](#examples-3)
 -   [inp](#inp)
-    -   [Parameters](#parameters-6)
-    -   [Examples](#examples-6)
+    -   [Parameters](#parameters-5)
+    -   [Examples](#examples-4)
 -   [warn](#warn)
-    -   [Parameters](#parameters-7)
-    -   [Examples](#examples-7)
+    -   [Parameters](#parameters-6)
+    -   [Examples](#examples-5)
 -   [quest](#quest)
-    -   [Parameters](#parameters-8)
-    -   [Examples](#examples-8)
+    -   [Parameters](#parameters-7)
+    -   [Examples](#examples-6)
 -   [succ](#succ)
-    -   [Parameters](#parameters-9)
-    -   [Examples](#examples-9)
+    -   [Parameters](#parameters-8)
+    -   [Examples](#examples-7)
 -   [extend](#extend)
-    -   [Parameters](#parameters-10)
-    -   [Examples](#examples-10)
+    -   [Parameters](#parameters-9)
+    -   [Examples](#examples-8)
 -   [clr](#clr)
 -   [clr](#clr-1)
+-   [lib](#lib)
+-   [log](#log)
+    -   [Parameters](#parameters-10)
+    -   [Examples](#examples-9)
+-   [use](#use)
+    -   [Parameters](#parameters-11)
+    -   [Examples](#examples-10)
 
 ## index
 
 Set of functions for coloured logs.
 
-## log
-
-STDOUT log.
-
 ### Parameters
 
--   `data` **any** Data to print
-
-### Examples
-
-```javascript
-log('Lorem ipsum dolore sit amet');
-```
-
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
-
-## use
-
-Colourise something.
-
-### Parameters
-
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the log in the theme
--   `data` **...any** Data
-
-### Examples
-
-```javascript
-let information = use('info', 'Some info styled text');
-```
-
-Nesting
-
-
-```javascript
-log('Something', use('warn', 'really ', use('info', 'cool!')));
-```
-
--   Throws **[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)** Invalid name
-
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Coloured output
+-   `data` **...any** 
 
 ## error
 
@@ -254,7 +218,7 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 -   **See: log**
 
-Print a success.
+Print a success log.
 
 ### Parameters
 
@@ -316,3 +280,49 @@ CLI colours.
 Colour/style theme for the CLI.
 
 Type: {inp: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), out: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>, info: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), error: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), warn: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), dbg: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), quest: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}
+
+## lib
+
+Set of library functions for nclr.
+
+## log
+
+STDOUT log.
+
+### Parameters
+
+-   `data` **any** Data to print
+
+### Examples
+
+```javascript
+log('Lorem ipsum dolore sit amet');
+```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
+## use
+
+Colourise something.
+
+### Parameters
+
+-   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Name of the log in the theme
+-   `data` **...any** Data
+
+### Examples
+
+```javascript
+let information = use('info', 'Some info styled text');
+```
+
+Nesting
+
+
+```javascript
+log('Something', use('warn', 'really ', use('info', 'cool!')));
+```
+
+-   Throws **[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)** Invalid name
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Coloured output
