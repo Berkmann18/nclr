@@ -8,69 +8,80 @@ const theme = nclr.getTheme();
 
 const text = 'Hello',
   END = '\u001b[39m',
-  OUT_END = '\u001b[22m\u001b[39m';
+  OUT_END = '\u001b[22m\u001b[39m',
+  START = {
+    info: '\u001b[94m',
+    dbg: '\u001b[90m',
+    out: '\u001b[36m\u001b[1m',
+    inp: '\u001b[37m',
+    warn: '\u001b[38;2;255;165;0m',
+    quest: '\u001b[34m',
+    error: '\u001b[31m',
+    succ: '\u001b[32m'
+  };
+
 
 test('info', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
-  expect(output).toStrictEqual([`\u001b[94m${text}${END}`]);
+  expect(output).toStrictEqual([`${START.info}${text}${END}`]);
   const res = stdout.inspectSync(() => info(text));
-  expect(res).toStrictEqual([`\u001b[94m${text}${END}\n`]);
+  expect(res).toStrictEqual([`${START.info}${text}${END}\n`]);
   expect(info(text)).toBeTruthy();
 });
 
 test('dbg', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.dbg(text)));
-  expect(output).toStrictEqual([`\u001b[90m${text}${END}`]);
+  expect(output).toStrictEqual([`${START.dbg}${text}${END}`]);
   const res = stdout.inspectSync(() => dbg(text));
-  expect(res).toStrictEqual([`\u001b[90m${text}${END}\n`]);
+  expect(res).toStrictEqual([`${START.dbg}${text}${END}\n`]);
   expect(dbg(text)).toBeTruthy();
 });
 
 test('out', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.out(text)));
-  expect(output).toStrictEqual([`\u001b[36m\u001b[1m${text}${OUT_END}`]);
+  expect(output).toStrictEqual([`${START.out}${text}${OUT_END}`]);
   const res = stdout.inspectSync(() => out(text));
-  expect(res).toStrictEqual([`\u001b[36m\u001b[1m${text}${OUT_END}\n`]);
+  expect(res).toStrictEqual([`${START.out}${text}${OUT_END}\n`]);
   expect(out(text)).toBeTruthy();
 });
 
 test('inp', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.inp(text)));
-  expect(output).toStrictEqual([`\u001b[37m${text}${END}`]);
+  expect(output).toStrictEqual([`${START.inp}${text}${END}`]);
   const res = stdout.inspectSync(() => inp(text));
-  expect(res).toStrictEqual([`\u001b[37m${text}${END}\n`]);
+  expect(res).toStrictEqual([`${START.inp}${text}${END}\n`]);
   expect(inp(text)).toBeTruthy();
 });
 
 test('warn', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.warn(text)));
-  expect(output).toStrictEqual([`\u001b[38;5;214m${text}${END}`]);
+  expect(output).toStrictEqual([`${START.warn}${text}${END}`]);
   const res = stdout.inspectSync(() => warn(text));
-  expect(res).toStrictEqual([`\u001b[38;5;214m${text}${END}\n`]);
+  expect(res).toStrictEqual([`${START.warn}${text}${END}\n`]);
   expect(warn(text)).toBeTruthy();
 });
 
 test('quest', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.quest(text)));
-  expect(output).toStrictEqual([`\u001b[34m${text}${END}`]);
+  expect(output).toStrictEqual([`${START.quest}${text}${END}`]);
   const res = stdout.inspectSync(() => quest(text));
-  expect(res).toStrictEqual([`\u001b[34m${text}${END}\n`]);
+  expect(res).toStrictEqual([`${START.quest}${text}${END}\n`]);
   expect(quest(text)).toBeTruthy();
 });
 
 test('error', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.error(text)));
-  expect(output).toStrictEqual([`\u001b[31m${text}${END}`]);
+  expect(output).toStrictEqual([`${START.error}${text}${END}`]);
   const res = stdout.inspectSync(() => error(text));
-  expect(res).toStrictEqual([`\u001b[31m${text}${END}\n`]);
+  expect(res).toStrictEqual([`${START.error}${text}${END}\n`]);
   expect(error(text)).toBeTruthy();
 });
 
 test('succ', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.succ(text)));
-  expect(output).toStrictEqual([`\u001b[32m${text}${END}`]);
+  expect(output).toStrictEqual([`${START.succ}${text}${END}`]);
   const res = stdout.inspectSync(() => succ(text));
-  expect(res).toStrictEqual([`\u001b[32m${text}${END}\n`]);
+  expect(res).toStrictEqual([`${START.succ}${text}${END}\n`]);
   expect(succ(text)).toBeTruthy();
 });
 
@@ -117,13 +128,13 @@ const testUse = (text, result) => {
 }
 
 test('use', () => {
-  const result = `\u001b[94m${text}${END}`;
+  const result = `${START.info}${text}${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text)));
   expect(output).toStrictEqual([result]);
   testUse(text, result);
 });
 
-const failedUse = ({errMsg, name, text, result = `\u001b[94m${text}${END}`} = {}) => {
+const failedUse = ({ errMsg, name, text, result = `${START.info}${text}${END}` } = {}) => {
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
   expect(output).toThrowError(errMsg);
   testUse(text, result);
@@ -148,25 +159,25 @@ test('use failed 2/2', () => {
 });
 
 test('nested use()', () => {
-  let result = `\u001b[94m${text} \u001b[31mError\u001b[94m${END}`;
+  let result = `${START.info}${text} ${START.error}Error${START.info}${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text, use('error', 'Error'))));
   expect(output).toStrictEqual([result]);
 });
 
 test('info and use', () => {
-  let result = `\u001b[94m${text} \u001b[31mError\u001b[94m${END}`;
+  let result = `${START.info}${text} ${START.error}Error${START.info}${END}`;
   const output = stdout.inspectSync(() => info(text, use('error', 'Error')));
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
 test('info and use(use)', () => {
-  let result = `\u001b[94m${text} \u001b[38;5;214mMy \u001b[31mdear\u001b[38;5;214m\u001b[94m${END}`;
+  let result = `${START.info}${text} ${START.warn}My ${START.error}dear${START.warn}${START.info}${END}`;
   const output = stdout.inspectSync(() => info(text, use('warn', 'My', use('error', 'dear'))));
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
 test('info and use(`${use}`)', () => {
-  let result = `\u001b[94m${text} \u001b[38;5;214mMy\u001b[31mDear\u001b[38;5;214m\u001b[94m${END}`;
+  let result = `${START.info}${text} ${START.warn}My${START.error}Dear${START.warn}${START.info}${END}`;
   const output = stdout.inspectSync(() => info(text, use('warn', `My${use('error', 'Dear')}`)));
   expect(output).toStrictEqual([`${result}\n`]);
 });
@@ -191,7 +202,7 @@ test('Simple overriding with extend()... 1/2', () => {
     info: 'magenta'
   });
 
-  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[35m${text}${END}`);
+  overrideWithExtendInfo(`${START.succ}${text}${END}`, `\u001b[35m${text}${END}`);
 });
 
 test('Simple overriding with extend()... 2/2', () => {
@@ -199,7 +210,7 @@ test('Simple overriding with extend()... 2/2', () => {
     info: 'fuchsia'
   });
 
-  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[38;5;201m${text}${END}`);
+  overrideWithExtendInfo(`${START.succ}${text}${END}`, `\u001b[38;5;201m${text}${END}`);
 });
 
 test('Overriding with extend()', () => {
@@ -228,7 +239,7 @@ test('Extend and use', () => {
     cust: 'red'
   });
   expect('cust' in nclr).toBeTruthy();
-  const result = `\u001b[31m${text}${END}`;
+  const result = `${START.error}${text}${END}`;
   const res = stdout.inspectSync(() => log(use('cust', text)));
   expect(res).toStrictEqual([result]);
   expect(use('cust', text)).toStrictEqual(result);
@@ -239,7 +250,7 @@ test('Extend and use', () => {
   });
 
   expect('cust' in nclr).toBeTruthy();
-  const result = `\u001b[31m${text}${END}`;
+  const result = `${START.error}${text}${END}`;
   const res = stdout.inspectSync(() => log(use('cust', text)));
   expect(res).toStrictEqual([result]);
   expect(use('cust', text)).toStrictEqual(result);
