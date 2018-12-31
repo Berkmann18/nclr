@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "snyk test && jest",
-    "fmt": "eslint -c ./config/.eslintrc.js *.js src/*.js --fix",
+    "fmt": "eslint -c ./config/.eslintrc.js *.js src/*.js test/*.js --fix",
     "doc:lint": "documentation lint index.js",
     "doc:md": "documentation build index.js -f md -o DOCUMENTATION.md",
     "doc": "npm run doc:lint && documentation readme index.js -s Documentation",
@@ -38,7 +38,8 @@
   },
   "homepage": "https://github.com/Berkmann18/nclr#readme",
   "dependencies": {
-    "colors": "^1.3.3"
+    "colors": "^1.3.3",
+    "figures": "^2.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.1",
@@ -49,7 +50,7 @@
     "documentation": "^9.0.0",
     "eslint": "^5.8.0",
     "eslint-plugin-security": "^1.4.0",
-    "husky": "^1.2.0",
+    "husky": "^1.2.1",
     "jest": "^23.6.0",
     "lint-staged": "^8.0.4",
     "remark-cli": "^6.0.0",
