@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/Berkmann18/nclr/compare/v1.2.0...v2.0.0) (2018-12-31)
+
+
+### Update
+
+* Replaced `log-symbols` with `figures` ([97ecfa3](https://github.com/Berkmann18/nclr/commit/97ecfa3)), closes [#20](https://github.com/Berkmann18/nclr/issues/20)
+
+
+### BREAKING CHANGES
+
+* `info`, `error`, `warning` and `question` outputs differently.
+
 # [1.3.0](https://github.com/Berkmann18/nclr/compare/v1.2.1...v1.3.0) (2018-12-11)
 
 
@@ -104,6 +116,3 @@
 ### Update
 
 * Added everything ([be44a896967acecb5a8c8774b9aec3529fcd12ec](https://github.com/Berkmann18/nclr/commit/be44a896967acecb5a8c8774b9aec3529fcd12ec))
-
-
-
