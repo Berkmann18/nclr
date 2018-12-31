@@ -12,13 +12,26 @@ node_js:
   - '6'
 install:
   - npm i
-  - npm i -g jest codecov eslint conventional-changelog
+  - npm i -g jest codecov eslint
 script:
   - npm run lint
+  - snyk auth $SNYK_TOKEN
   - npm test
   - codecov
 after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
+  - snyk monitor
+jobs:
+  include:
+    - stage: release
+      node_js: 'node'
+      script: skip
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: npm run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
+stages:
+  - name: release
+    if: branch = master
