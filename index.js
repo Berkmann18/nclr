@@ -1,12 +1,30 @@
-const clr = require('colors/safe');
-let theme = require('./src/theme');
+const chalk = require('chalk');
+
+/**
+ * @description Style theme for the functions.
+ * @type {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function}}
+ * @private
+ */
+const theme = {
+  inp: chalk.white,
+  out: chalk.cyan.bold,
+  info: chalk.blueBright,
+  error: chalk.red,
+  warn: chalk.keyword('orange'),
+  dbg: chalk.gray,
+  quest: chalk.blue,
+  succ: chalk.green
+};
+let THEME = Object.keys(theme);
+
+console.log('level=', chalk.level, 'enabled=', chalk.enabled);
+chalk.enabled = true;
+chalk.level = 2;
 
 /**
  * @fileoverview Set of functions for coloured logs.
  * @module
  */
-
-clr.setTheme(theme);
 
 /**
  * @description STDOUT log.
@@ -16,16 +34,11 @@ clr.setTheme(theme);
  */
 const log = (...data) => process.stdout.write(...data);
 
-let THEME = Object.keys(theme);
-
 /**
- * @description Update the theme in `colors`
- * @private
+ * @description Get the theme.
+ * @returns {{inp: function, out: function, info: function, error: function, warn: function, dbg: function, quest: function, succ: function}} Theme
  */
-const updateTheme = () => {
-  clr.setTheme(theme);
-  THEME = Object.keys(theme);
-}
+const getTheme = () => theme;
 
 /**
  * @description Check if the argument is a valid name/key.
@@ -47,7 +60,7 @@ const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data);
  */
 const use = (name, ...data) => {
   if (!isValidName(name)) throw new Error(`Invalid name "${name}"`);
-  if (THEME.includes(name)) return clr[name](data.join(' '));
+  if (THEME.includes(name)) return theme[name](data.join(' '));
   else throw new Error(`The name ${name} isn't specified in the theme used`);
 };
 
@@ -58,7 +71,7 @@ const use = (name, ...data) => {
  * @see log
  * @returns {boolean} Did it happened?
  */
-const error = (...data) => log(clr.error(data.join(' ')) + '\n');
+const error = (...data) => log(theme.error(data.join(' ')) + '\n');
 
 /**
  * @description Print an information.
@@ -67,7 +80,7 @@ const error = (...data) => log(clr.error(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const info = (...data) => log(clr.info(data.join(' ')) + '\n');
+const info = (...data) => log(theme.info(data.join(' ')) + '\n');
 
 /**
  * @description Print a debug message.
@@ -76,7 +89,7 @@ const info = (...data) => log(clr.info(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const dbg = (...data) => log(clr.dbg(data.join(' ')) + '\n');
+const dbg = (...data) => log(theme.dbg(data.join(' ')) + '\n');
 
 /**
  * @description Print an output.
@@ -85,7 +98,7 @@ const dbg = (...data) => log(clr.dbg(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const out = (...data) => log(clr.out(data.join(' ')) + '\n');
+const out = (...data) => log(theme.out(data.join(' ')) + '\n');
 
 /**
  * @description Print an input.
@@ -94,7 +107,7 @@ const out = (...data) => log(clr.out(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const inp = (...data) => log(clr.inp(data.join(' ')) + '\n');
+const inp = (...data) => log(theme.inp(data.join(' ')) + '\n');
 
 /**
  * @description Print a warning.
@@ -103,7 +116,7 @@ const inp = (...data) => log(clr.inp(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
+const warn = (...data) => log(theme.warn(data.join(' ')) + '\n');
 
 /**
  * @description Print a question.
@@ -112,16 +125,30 @@ const warn = (...data) => log(clr.warn(data.join(' ')) + '\n');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const quest = (...data) => log(clr.quest(data.join(' ')) + '\n');
+const quest = (...data) => log(theme.quest(data.join(' ')) + '\n');
 
 /**
- * @description Print a success log.
+ * @description Print a success.
  * @param {...*} data Data to print
  * @example succ('Achievement unlocked');
  * @see log
  * @returns {boolean} Did it happened?
  */
-const succ = (...data) => log(clr.succ(data.join(' ')) + '\n');
+const succ = (...data) => log(theme.succ(data.join(' ')) + '\n');
+
+/**
+ * @description Chain strings of an array as a function chain.
+ * @param {string[]} arr Array of function names
+ * @returns {function} Functional chain
+ * @private
+ */
+const arrToFxChain = (arr) => {
+  let chain = chalk;
+  for (let i = 0; i < arr.length; ++i) {
+    chain = (arr[i] in chalk) ? chain[arr[i]] : chain.keyword(arr[i]);
+  }
+  return chain;
+};
 
 /**
  * @description Extend the current theme.
@@ -148,11 +175,14 @@ const succ = (...data) => log(clr.succ(data.join(' ')) + '\n');
 const extend = (extension) => {
   for (let key in extension) {
     if (!isValidName(key)) throw new Error(`Invalid extension key "${key}"`);
-    theme[key] = extension[key];
-
-    module.exports[key] = (...data) => log(clr[key](data.join(' ')) + '\n');
+    let clr = extension[key];
+    if (Array.isArray(clr)) theme[key] = arrToFxChain(clr);
+    else {
+      theme[key] = (clr in chalk) ? chalk[clr] : chalk.keyword(clr);
+    }
+    module.exports[key] = (...data) => log(theme[key](data.join(' ')) + '\n');
   }
-  updateTheme();
+  THEME = Object.keys(theme);
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use }
+module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use, getTheme }

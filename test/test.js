@@ -1,24 +1,25 @@
 const nclr = require('../index');
 const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use } = nclr;
-const stdout = require('test-console').stdout;
+const stdout = require('test-console').stdout,
+  chalk = require('chalk');
 
-const clr = require('colors/safe');
-clr.setTheme(require('../src/theme'));
+const theme = nclr.getTheme();
+
 
 const text = 'Hello',
   END = '\u001b[39m',
-  OUT_END = '\u001b[39m\u001b[22m';
+  OUT_END = '\u001b[22m\u001b[39m';
 
 test('info', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.info(text)));
-  expect(output).toStrictEqual([`\u001b[32m${text}${END}`]);
+  const output = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
+  expect(output).toStrictEqual([`\u001b[94m${text}${END}`]);
   const res = stdout.inspectSync(() => info(text));
-  expect(res).toStrictEqual([`\u001b[32m${text}${END}\n`]);
+  expect(res).toStrictEqual([`\u001b[94m${text}${END}\n`]);
   expect(info(text)).toBeTruthy();
 });
 
 test('dbg', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.dbg(text)));
+  const output = stdout.inspectSync(() => process.stdout.write(theme.dbg(text)));
   expect(output).toStrictEqual([`\u001b[90m${text}${END}`]);
   const res = stdout.inspectSync(() => dbg(text));
   expect(res).toStrictEqual([`\u001b[90m${text}${END}\n`]);
@@ -26,15 +27,15 @@ test('dbg', () => {
 });
 
 test('out', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.out(text)));
-  expect(output).toStrictEqual([`\u001b[1m\u001b[36m${text}${OUT_END}`]);
+  const output = stdout.inspectSync(() => process.stdout.write(theme.out(text)));
+  expect(output).toStrictEqual([`\u001b[36m\u001b[1m${text}${OUT_END}`]);
   const res = stdout.inspectSync(() => out(text));
-  expect(res).toStrictEqual([`\u001b[1m\u001b[36m${text}${OUT_END}\n`]);
+  expect(res).toStrictEqual([`\u001b[36m\u001b[1m${text}${OUT_END}\n`]);
   expect(out(text)).toBeTruthy();
 });
 
 test('inp', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.inp(text)));
+  const output = stdout.inspectSync(() => process.stdout.write(theme.inp(text)));
   expect(output).toStrictEqual([`\u001b[37m${text}${END}`]);
   const res = stdout.inspectSync(() => inp(text));
   expect(res).toStrictEqual([`\u001b[37m${text}${END}\n`]);
@@ -42,15 +43,15 @@ test('inp', () => {
 });
 
 test('warn', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.warn(text)));
-  expect(output).toStrictEqual([`\u001b[33m${text}${END}`]);
+  const output = stdout.inspectSync(() => process.stdout.write(theme.warn(text)));
+  expect(output).toStrictEqual([`\u001b[38;5;214m${text}${END}`]);
   const res = stdout.inspectSync(() => warn(text));
-  expect(res).toStrictEqual([`\u001b[33m${text}${END}\n`]);
+  expect(res).toStrictEqual([`\u001b[38;5;214m${text}${END}\n`]);
   expect(warn(text)).toBeTruthy();
 });
 
 test('quest', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.quest(text)));
+  const output = stdout.inspectSync(() => process.stdout.write(theme.quest(text)));
   expect(output).toStrictEqual([`\u001b[34m${text}${END}`]);
   const res = stdout.inspectSync(() => quest(text));
   expect(res).toStrictEqual([`\u001b[34m${text}${END}\n`]);
@@ -58,7 +59,7 @@ test('quest', () => {
 });
 
 test('error', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.error(text)));
+  const output = stdout.inspectSync(() => process.stdout.write(theme.error(text)));
   expect(output).toStrictEqual([`\u001b[31m${text}${END}`]);
   const res = stdout.inspectSync(() => error(text));
   expect(res).toStrictEqual([`\u001b[31m${text}${END}\n`]);
@@ -66,12 +67,13 @@ test('error', () => {
 });
 
 test('succ', () => {
-  const output = stdout.inspectSync(() => process.stdout.write(clr.succ(text)));
-  expect(output).toStrictEqual([`\u001b[1m\u001b[32m${text}${OUT_END}`]);
+  const output = stdout.inspectSync(() => process.stdout.write(theme.succ(text)));
+  expect(output).toStrictEqual([`\u001b[32m${text}${END}`]);
   const res = stdout.inspectSync(() => succ(text));
-  expect(res).toStrictEqual([`\u001b[1m\u001b[32m${text}${OUT_END}\n`]);
+  expect(res).toStrictEqual([`\u001b[32m${text}${END}\n`]);
   expect(succ(text)).toBeTruthy();
 });
+
 test('log', () => {
   const output = stdout.inspectSync(() => log(text));
   expect(output).toStrictEqual([text]);
@@ -99,98 +101,118 @@ test('Illigal extend', () => {
 });
 
 test('Dangerous extend', () => {
-  const harmless = (evt) => console.log('harmless: This=', this, 'evt=', evt);
+  const harmless = (...evt) => console.log('harmless: This=', this, 'evt=', evt);
   const myFx = (evt) => console.log('myFx: This=', this, 'evt=', evt);
   const ext = () => extend({
-    [harmless(this)]: 'green',
+    [harmless(this, test)]: 'green',
     [myFx]: 'red'
   });
   expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
 });
 
+const testUse = (text, result) => {
+  const res = stdout.inspectSync(() => log(use('info', text)));
+  expect(res).toStrictEqual([result]);
+  expect(use('info', text)).toStrictEqual(result);
+}
+
 test('use', () => {
-  const result = `\u001b[32m${text}${END}`;
+  const result = `\u001b[94m${text}${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text)));
   expect(output).toStrictEqual([result]);
-  const res = stdout.inspectSync(() => log(use('info', text)));
-  expect(res).toStrictEqual([result]);
-  expect(use('info', text)).toStrictEqual(result);
+  testUse(text, result);
 });
 
-test('use failed 1/2', () => {
-  let result = `\u001b[32m${text}${END}`, name = 'spec';
+const failedUse = ({errMsg, name, text, result = `\u001b[94m${text}${END}`} = {}) => {
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
-  expect(output).toThrowError(`The name ${name} isn't specified in the theme used`);
-  const res = stdout.inspectSync(() => log(use('info', text)));
-  expect(res).toStrictEqual([result]);
-  expect(use('info', text)).toStrictEqual(result);
+  expect(output).toThrowError(errMsg);
+  testUse(text, result);
+};
+
+test('use failed 1/2', () => {
+  let name = 'spec';
+  failedUse({
+    errMsg: `The name ${name} isn't specified in the theme used`,
+    name,
+    text
+  });
 });
 
 test('use failed 2/2', () => {
-  let result = `\u001b[32m${text}${END}`, name = () => null;
-  const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
-  expect(output).toThrowError(`Invalid name "${name}"`);
-  const res = stdout.inspectSync(() => log(use('info', text)));
-  expect(res).toStrictEqual([result]);
-  expect(use('info', text)).toStrictEqual(result);
+  let name = () => null;
+  failedUse({
+    errMsg: `Invalid name "${name}"`,
+    name,
+    text
+  });
 });
 
 test('nested use()', () => {
-  let result = `\u001b[32m${text} \u001b[31mError\u001b[32m${END}`;
+  let result = `\u001b[94m${text} \u001b[31mError\u001b[94m${END}`;
   const output = stdout.inspectSync(() => process.stdout.write(use('info', text, use('error', 'Error'))));
   expect(output).toStrictEqual([result]);
 });
 
 test('info and use', () => {
-  let result = `\u001b[32m${text} \u001b[31mError\u001b[32m${END}`;
+  let result = `\u001b[94m${text} \u001b[31mError\u001b[94m${END}`;
   const output = stdout.inspectSync(() => info(text, use('error', 'Error')));
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
 test('info and use(use)', () => {
-  let result = `\u001b[32m${text} \u001b[33mMy \u001b[31mdear\u001b[33m\u001b[32m${END}`;
+  let result = `\u001b[94m${text} \u001b[38;5;214mMy \u001b[31mdear\u001b[38;5;214m\u001b[94m${END}`;
   const output = stdout.inspectSync(() => info(text, use('warn', 'My', use('error', 'dear'))));
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
 test('info and use(`${use}`)', () => {
-  let result = `\u001b[32m${text} \u001b[33mMy\u001b[31mDear\u001b[33m\u001b[32m${END}`;
+  let result = `\u001b[94m${text} \u001b[38;5;214mMy\u001b[31mDear\u001b[38;5;214m\u001b[94m${END}`;
   const output = stdout.inspectSync(() => info(text, use('warn', `My${use('error', 'Dear')}`)));
   expect(output).toStrictEqual([`${result}\n`]);
 });
 
-test('Simple overriding with extend()...', () => {
-  expect('info' in clr).toBeTruthy();
+const overrideWithExtendInfo = (initial, overriden) => {
+  expect(nclr.info).not.toBe(info);
+  expect('info' in theme).toBeTruthy();
+  const outInfo = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
+  expect(outInfo).not.toStrictEqual([initial]);
+  expect(outInfo).toStrictEqual([overriden]);
+
+  const resOut = stdout.inspectSync(() => info(text));
+  expect(resOut).toStrictEqual([`${overriden}\n`]); //Override on the destructured scope
+  const resIn = stdout.inspectSync(() => nclr.info(text));
+  expect(resIn).toStrictEqual([`${overriden}\n`]); //Override on the module's scope
+  expect(nclr.info(text)).toBeTruthy();
+};
+
+test('Simple overriding with extend()... 1/2', () => {
+  expect('info' in theme).toBeTruthy();
   extend({
     info: 'magenta'
   });
-  expect(nclr.info).not.toBe(info);
-  expect('info' in clr).toBeTruthy();
-  const initialInfo = `\u001b[32m${text}${END}`,
-    overridenInfo = `\u001b[35m${text}${END}`;
 
-  const outInfo = stdout.inspectSync(() => process.stdout.write(clr.info(text)));
-  expect(outInfo).not.toStrictEqual([initialInfo]);
-  expect(outInfo).toStrictEqual([overridenInfo]);
+  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[35m${text}${END}`);
+});
 
-  const resOut = stdout.inspectSync(() => info(text));
-  expect(resOut).toStrictEqual([`${overridenInfo}\n`]); //Override on the destructured scope
-  const resIn = stdout.inspectSync(() => nclr.info(text));
-  expect(resIn).toStrictEqual([`${overridenInfo}\n`]); //Override on the module's scope
-  expect(nclr.info(text)).toBeTruthy();
+test('Simple overriding with extend()... 2/2', () => {
+  extend({
+    info: 'fuchsia'
+  });
+
+  overrideWithExtendInfo(`\u001b[32m${text}${END}`, `\u001b[38;5;201m${text}${END}`);
 });
 
 test('Overriding with extend()', () => {
-  expect('warn' in clr).toBeTruthy();
+  expect('warn' in theme).toBeTruthy();
   extend({
-    warn: ['yellow', 'underline']
+    warn: ['orange', 'underline']
   });
   expect(nclr.warn).not.toBe(warn); //Overriden but becomes an anonymous function
-  expect('warn' in clr).toBeTruthy();
-  const initialWarn = `\u001b[33m${text}${END}`,
-    overrideWarn = `\u001b[4m\u001b[33m${text}${END}\u001b[24m`;
+  expect('warn' in theme).toBeTruthy();
+  const initialWarn = `\u001b[38;5;214m${text}${END}`,
+    overrideWarn = `\u001b[38;5;214m\u001b[4m${text}\u001b[24m${END}`;
 
-  const outWarn = stdout.inspectSync(() => process.stdout.write(clr.warn(text)));
+  const outWarn = stdout.inspectSync(() => process.stdout.write(theme.warn(text)));
   expect(outWarn).not.toStrictEqual([initialWarn]);
   expect(outWarn).toStrictEqual([overrideWarn]);
 
@@ -201,6 +223,16 @@ test('Overriding with extend()', () => {
   expect(nclr.warn(text)).toBeTruthy();
 });
 
+test('Extend and use', () => {
+  extend({
+    cust: 'red'
+  });
+  expect('cust' in nclr).toBeTruthy();
+  const result = `\u001b[31m${text}${END}`;
+  const res = stdout.inspectSync(() => log(use('cust', text)));
+  expect(res).toStrictEqual([result]);
+  expect(use('cust', text)).toStrictEqual(result);
+});
 test('Extend and use', () => {
   extend({
     cust: 'red'

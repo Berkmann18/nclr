@@ -42,45 +42,49 @@ Please refer to [that](.github/CONTRIBUTING.md).
 ### Table of Contents
 
 -   [index](#index)
--   [log](#log)
     -   [Parameters](#parameters)
-    -   [Examples](#examples)
--   [use](#use)
+-   [log](#log)
     -   [Parameters](#parameters-1)
+    -   [Examples](#examples)
+-   [getTheme](#gettheme)
+-   [use](#use)
+    -   [Parameters](#parameters-2)
     -   [Examples](#examples-1)
 -   [error](#error)
-    -   [Parameters](#parameters-2)
+    -   [Parameters](#parameters-3)
     -   [Examples](#examples-2)
 -   [info](#info)
-    -   [Parameters](#parameters-3)
+    -   [Parameters](#parameters-4)
     -   [Examples](#examples-3)
 -   [dbg](#dbg)
-    -   [Parameters](#parameters-4)
+    -   [Parameters](#parameters-5)
     -   [Examples](#examples-4)
 -   [out](#out)
-    -   [Parameters](#parameters-5)
+    -   [Parameters](#parameters-6)
     -   [Examples](#examples-5)
 -   [inp](#inp)
-    -   [Parameters](#parameters-6)
+    -   [Parameters](#parameters-7)
     -   [Examples](#examples-6)
 -   [warn](#warn)
-    -   [Parameters](#parameters-7)
+    -   [Parameters](#parameters-8)
     -   [Examples](#examples-7)
 -   [quest](#quest)
-    -   [Parameters](#parameters-8)
+    -   [Parameters](#parameters-9)
     -   [Examples](#examples-8)
 -   [succ](#succ)
-    -   [Parameters](#parameters-9)
+    -   [Parameters](#parameters-10)
     -   [Examples](#examples-9)
 -   [extend](#extend)
-    -   [Parameters](#parameters-10)
+    -   [Parameters](#parameters-11)
     -   [Examples](#examples-10)
--   [clr](#clr)
--   [clr](#clr-1)
 
 ## index
 
 Set of functions for coloured logs.
+
+### Parameters
+
+-   `data` **...any** 
 
 ## log
 
@@ -97,6 +101,12 @@ log('Lorem ipsum dolore sit amet');
 ```
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Did it happened?
+
+## getTheme
+
+Get the theme.
+
+Returns **{inp: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), out: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), info: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), error: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), warn: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), dbg: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), quest: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function), succ: [function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)}** Theme
 
 ## use
 
@@ -254,7 +264,7 @@ Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 -   **See: log**
 
-Print a success log.
+Print a success.
 
 ### Parameters
 
@@ -306,13 +316,3 @@ data(42);
 ```
 
 -   Throws **[Error](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error)** Invalid extension key
-
-## clr
-
-CLI colours.
-
-## clr
-
-Colour/style theme for the CLI.
-
-Type: {inp: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), out: [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>, info: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), error: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), warn: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), dbg: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String), quest: [string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)}
