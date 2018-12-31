@@ -86,28 +86,41 @@ const succ = (...data) => log(clr.succ(fig.tick + ' ' + data.join(' ')) + '\n');
  * @example <caption>Using extensions as methods:</caption>
  * const nclr = require('nclr');
  * nclr.extend({
- *   suc: ['green', 'underline'],
- *   data: 'magenta'
+ *   suc: {
+ *     styles: ['green', 'underline'],
+ *     symbol: 'check'
+ *   }
+ *   data: {
+ *     styles: 'magenta',
+ *     symbol: 'pointer',
+ *   }
  * });
  * nclr.suc('Yay!');
  * nclr.data(42);
  * @example <caption>Using extensions as functions:</caption>
  * const nclr = require('nclr');
  * nclr.extend({
- *   suc: ['green', 'underline'],
- *   data: 'magenta'
+ *   suc: {
+ *    styles: ['green', 'underline'],
+ *    symbol: 'check'
+ *  }
+ *   data: {
+ *    styles: 'magenta',
+ *    symbol: 'pointer'
  * });
  * const { suc, data } = nclr;
  * suc('Yay!');
  * data(42);
  * @throws {Error} Invalid extension key
+ * @throws {Error} No <code>styles</code> or <code>symbol</code> property found
  */
 const extend = (extension) => {
   for (let key in extension) {
     if (!isValidName(key)) throw new Error(`Invalid extension key "${key}"`);
-    theme[key] = extension[key];
+    if (extension[key].styles === undefined || extension[key].symbol === undefined) throw new Error(`No 'styles' or 'symbol' property found for "${key}"`);
+    theme[key] = extension[key].styles;
 
-    module.exports[key] = (...data) => log(clr[key](data.join(' ')) + '\n');
+    module.exports[key] = (...data) => log(clr[key](fig[extension[key].symbol] + ' ' + data.join(' ')) + '\n');
   }
   updateTheme();
 };

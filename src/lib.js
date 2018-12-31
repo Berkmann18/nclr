@@ -50,4 +50,8 @@ const use = (name, ...data) => {
   else throw new Error(`The name ${name} isn't specified in the theme used`);
 };
 
+// const resetTheme = () => {
+
+// }
+
 module.exports = { log, updateTheme, isValidName, use }
