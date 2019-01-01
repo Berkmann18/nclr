@@ -130,7 +130,7 @@ test('Dangerous extend', () => {
       symbol: 'dot'
     }
   });
-  expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
+  expect(ext).toThrowError('Invalid extension key "undefined"');
 });
 
 test('use', () => {

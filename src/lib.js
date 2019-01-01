@@ -18,7 +18,7 @@ let THEME = Object.keys(theme);
 const log = (...data) => process.stdout.write(...data);
 
 /**
- * @description Update the theme in `colors`
+ * @description Update the theme in `colors`.
  * @private
  */
 const updateTheme = () => {
@@ -32,7 +32,7 @@ const updateTheme = () => {
  * @returns {boolean} Validity
  * @private
  */
-const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data);
+const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data) && data !== undefined && data !== 'undefined';
 
 /**
  * @description Colourise something.
@@ -49,9 +49,5 @@ const use = (name, ...data) => {
   if (THEME.includes(name)) return clr[name](data.join(' '));
   else throw new Error(`The name ${name} isn't specified in the theme used`);
 };
-
-// const resetTheme = () => {
-
-// }
 
 module.exports = { log, updateTheme, isValidName, use }
