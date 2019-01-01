@@ -46,12 +46,12 @@ const updateTheme = () => {
 };
 
 /**
- * @description Check if the argument is a valid name/key.
+ * @description Check if the argument is a valid name/key and if it isn't an undefined value.
  * @param {*} data Data to check
  * @returns {boolean} Validity
  * @private
  */
-const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data);
+const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data) && data !== undefined && data !== 'undefined';
 
 /**
  * @description Colourise something.

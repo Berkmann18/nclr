@@ -117,7 +117,7 @@ test('Dangerous extend', () => {
     [harmless(this, test)]: 'green',
     [myFx]: 'red'
   });
-  expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
+  expect(ext).toThrowError('Invalid extension key "undefined"');
 });
 
 const testUse = (text, result) => {

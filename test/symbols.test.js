@@ -123,9 +123,7 @@ test('Illigal extend', () => {
 test('Dangerous extend', () => {
   const harmless = (...evt) => console.log('harmless: This=', this, 'evt=', evt);
   const myFx = (evt) => console.log('myFx: This=', this, 'evt=', evt);
-  // console.log('first=', harmless(this, test)); //first= undefined
   const ext = () => extend({
-    //@todo Make sure that undefined values are rejected too
     [harmless(this, test)]: {
       styles: 'green',
       symbol: 'dot'
@@ -135,7 +133,7 @@ test('Dangerous extend', () => {
       symbol: 'cross'
     }
   });
-  expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
+  expect(ext).toThrowError('Invalid extension key "undefined"');
 });
 
 const testUse = (text, result) => {
@@ -268,10 +266,9 @@ test('Extend and use', () => {
       symbol: 'circle'
     }
   });
-  // console.log('theme=', theme);
   expect('cust' in nclr).toBeTruthy();
   const result = `${START.error}${text}${END}`;
   const res = stdout.inspectSync(() => log(use('cust', text)));
   expect(res).toStrictEqual([result]);
-  // expect(use('cust', text)).toStrictEqual(`${START.error}${fig.circle} ${text}${END}`);
+  expect(use('cust', text)).toStrictEqual(`${START.error}${text}${END}`);
 });
