@@ -1,3 +1,5 @@
+# [2.1.0](https://github.com/Berkmann18/nclr/compare/v2.0.0...v2.1.0) (2019-01-08)
+
 # [2.0.0](https://github.com/Berkmann18/nclr/compare/v1.2.0...v2.0.0) (2018-12-31)
 
 
