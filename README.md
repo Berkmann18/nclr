@@ -31,7 +31,14 @@ Mini NPM package with coloured log functions and more.
 
 # Contributions
 
-Please refer to [that](.github/CONTRIBUTING.md).
+Please refer to [the contribution guideline](.github/CONTRIBUTING.md).
+
+## Contributors
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+| [<img src="https://avatars0.githubusercontent.com/u/8260834?v=4" width="100px;"/><br /><sub><b>Maximilian Berkmann</b></sub>](http://maxcubing.wordpress.com)<br />[🐛](https://github.com/Berkmann18/nclr/issues?q=author%3ABerkmann18 "Bug reports") [💻](https://github.com/Berkmann18/nclr/commits?author=Berkmann18 "Code") [📖](https://github.com/Berkmann18/nclr/commits?author=Berkmann18 "Documentation") [🤔](#ideas-Berkmann18 "Ideas, Planning, & Feedback") [💬](#question-Berkmann18 "Answering Questions") [👀](#review-Berkmann18 "Reviewed Pull Requests") [🛡️](#security-Berkmann18 "Security") [⚠️](https://github.com/Berkmann18/nclr/commits?author=Berkmann18 "Tests") | [<img src="https://avatars2.githubusercontent.com/u/36207117?v=4" width="100px;"/><br /><sub><b>Dependabot</b></sub>](https://dependabot.com)<br />[🔧](#tool-dependabot-bot "Tools") | [<img src="https://avatars1.githubusercontent.com/u/32174276?v=4" width="100px;"/><br /><sub><b>Semantic Release Bot</b></sub>](http://semantic-release.org/)<br />[📖](https://github.com/Berkmann18/nclr/commits?author=semantic-release-bot "Documentation") [📦](#platform-semantic-release-bot "Packaging/porting to new platform") | [<img src="https://avatars3.githubusercontent.com/u/23704769?v=4" width="100px;"/><br /><sub><b>Codacy Badger</b></sub>](https://www.codacy.com)<br />[📖](https://github.com/Berkmann18/nclr/commits?author=codacy-badger "Documentation") |
+| :---: | :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 <!--lint disable list-item-indent list-item-bullet-indent -->
 
@@ -41,44 +48,49 @@ Please refer to [that](.github/CONTRIBUTING.md).
 
 ### Table of Contents
 
--   [index](#index)
-    -   [Parameters](#parameters)
--   [error](#error)
-    -   [Parameters](#parameters-1)
-    -   [Examples](#examples)
--   [info](#info)
-    -   [Parameters](#parameters-2)
-    -   [Examples](#examples-1)
--   [dbg](#dbg)
-    -   [Parameters](#parameters-3)
-    -   [Examples](#examples-2)
--   [out](#out)
-    -   [Parameters](#parameters-4)
-    -   [Examples](#examples-3)
--   [inp](#inp)
-    -   [Parameters](#parameters-5)
-    -   [Examples](#examples-4)
--   [warn](#warn)
-    -   [Parameters](#parameters-6)
-    -   [Examples](#examples-5)
--   [quest](#quest)
-    -   [Parameters](#parameters-7)
-    -   [Examples](#examples-6)
--   [succ](#succ)
-    -   [Parameters](#parameters-8)
-    -   [Examples](#examples-7)
--   [extend](#extend)
-    -   [Parameters](#parameters-9)
-    -   [Examples](#examples-8)
--   [clr](#clr)
--   [clr](#clr-1)
--   [lib](#lib)
--   [log](#log)
-    -   [Parameters](#parameters-10)
-    -   [Examples](#examples-9)
--   [use](#use)
-    -   [Parameters](#parameters-11)
-    -   [Examples](#examples-10)
+- [nclr](#nclr)
+- [Contributions](#contributions)
+  - [Contributors](#contributors)
+- [Documentation](#documentation)
+    - [Table of Contents](#table-of-contents)
+  - [index](#index)
+    - [Parameters](#parameters)
+  - [error](#error)
+    - [Parameters](#parameters-1)
+    - [Examples](#examples)
+  - [info](#info)
+    - [Parameters](#parameters-2)
+    - [Examples](#examples-1)
+  - [dbg](#dbg)
+    - [Parameters](#parameters-3)
+    - [Examples](#examples-2)
+  - [out](#out)
+    - [Parameters](#parameters-4)
+    - [Examples](#examples-3)
+  - [inp](#inp)
+    - [Parameters](#parameters-5)
+    - [Examples](#examples-4)
+  - [warn](#warn)
+    - [Parameters](#parameters-6)
+    - [Examples](#examples-5)
+  - [quest](#quest)
+    - [Parameters](#parameters-7)
+    - [Examples](#examples-6)
+  - [succ](#succ)
+    - [Parameters](#parameters-8)
+    - [Examples](#examples-7)
+  - [extend](#extend)
+    - [Parameters](#parameters-9)
+    - [Examples](#examples-8)
+  - [clr](#clr)
+  - [clr](#clr-1)
+  - [lib](#lib)
+  - [log](#log)
+    - [Parameters](#parameters-10)
+    - [Examples](#examples-9)
+  - [use](#use)
+    - [Parameters](#parameters-11)
+    - [Examples](#examples-10)
 
 ## index
 
