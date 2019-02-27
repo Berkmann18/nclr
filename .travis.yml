@@ -4,6 +4,8 @@ cache:
     - ~/.npm
 notifications:
   email: false
+env:
+  - TERM=screen-256color
 node_js:
   - 'node'
   - '10'
