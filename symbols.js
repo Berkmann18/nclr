@@ -1,7 +1,7 @@
 const clr = require('colors/safe'),
   fig = require('figures');
 let theme = require('./src/theme'),
-  { log, use, isValidName, updateTheme } = require('./src/lib');
+  { log, use, isValidName, updateTheme, restoreTheme } = require('./src/lib');
 
 /**
  * @fileoverview Set of functions for coloured logs with symbols.
@@ -125,4 +125,4 @@ const extend = (extension) => {
   updateTheme();
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use }
+module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use, restore: restoreTheme }

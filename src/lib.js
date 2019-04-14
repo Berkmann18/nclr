@@ -6,6 +6,7 @@ const theme = require('./theme');
  * @module
  */
 
+const INITIAL_THEME = { ...theme }; //Backup
 clr.setTheme(theme);
 let THEME = Object.keys(theme);
 
@@ -50,4 +51,12 @@ const use = (name, ...data) => {
   else throw new Error(`The name ${name} isn't specified in the theme used`);
 };
 
-module.exports = { log, updateTheme, isValidName, use }
+/**
+ * @description Restore the default fields of the theme.
+ */
+const restoreTheme = () => {
+  for (let key in INITIAL_THEME) theme[key] = INITIAL_THEME[key];
+  updateTheme();
+};
+
+module.exports = { log, updateTheme, isValidName, use, restoreTheme }
