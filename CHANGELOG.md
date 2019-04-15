@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/Berkmann18/nclr/compare/v2.2.0...v2.2.1) (2019-04-15)
+
+
+### Fix
+
+* Fixed NPM release issue ([0e12d40ad298fa1d9c5c5b3c63b49a412de778ab](https://github.com/Berkmann18/nclr/commit/0e12d40ad298fa1d9c5c5b3c63b49a412de778ab))
+
 # [2.2.0](https://github.com/Berkmann18/nclr/compare/v2.1.0...v2.2.0) (2019-04-14)
 
 
