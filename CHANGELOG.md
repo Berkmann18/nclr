@@ -1,3 +1,15 @@
+## [2.2.2](https://github.com/Berkmann18/nclr/compare/v2.2.1...v2.2.2) (2019-04-16)
+
+
+### Fix
+
+* Security fix ([f26d129cff0b1f3d0b51f22d6aabb8ba86b400ff](https://github.com/Berkmann18/nclr/commit/f26d129cff0b1f3d0b51f22d6aabb8ba86b400ff))
+
+### Upgrade
+
+* Bump all-contributors-cli from 6.2.0 to 6.3.0 ([664d75b2057b6cd12b245d8e511d70a5c19124a8](https://github.com/Berkmann18/nclr/commit/664d75b2057b6cd12b245d8e511d70a5c19124a8))
+* Bump snyk from 1.150.0 to 1.151.0 ([aa91f699f044c12c551a531167a71194ce89ac39](https://github.com/Berkmann18/nclr/commit/aa91f699f044c12c551a531167a71194ce89ac39))
+
 ## [2.2.1](https://github.com/Berkmann18/nclr/compare/v2.2.0...v2.2.1) (2019-04-15)
 
 
