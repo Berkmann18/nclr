@@ -1,9 +1,10 @@
+// const chalk = require('chalk');
 const nclr = require('../index');
 const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use } = nclr;
 const stdout = require('test-console').stdout;
 
 const theme = nclr.getTheme();
-
+console.log('platform=', process.platform);
 
 const text = 'Hello',
   END = '\u001b[39m',
@@ -13,12 +14,17 @@ const text = 'Hello',
     dbg: '\u001b[90m',
     out: '\u001b[36m\u001b[1m',
     inp: '\u001b[37m',
-    warn: '\u001b[38;2;255;165;0m',
+    warn: '\u001b[38;5;214m',
     quest: '\u001b[34m',
     error: '\u001b[31m',
     succ: '\u001b[32m'
   };
 
+// beforeEach(() => {
+//   // For the colored tests, enable chalk via its API.
+//   chalk.enabled = true;
+//   chalk.level = 4;
+// });
 
 test('info', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
@@ -54,6 +60,7 @@ test('inp', () => {
 
 test('warn', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.warn(text)));
+  console.log('test:warn', use('warn', text).replace(/\u001b/g, 'U'), 'U=\\u001b');
   expect(output).toStrictEqual([`${START.warn}${text}${END}`]);
   const res = stdout.inspectSync(() => warn(text));
   expect(res).toStrictEqual([`${START.warn}${text}${END}\n`]);
@@ -201,15 +208,14 @@ test('Simple overriding with extend()... 1/2', () => {
     info: 'magenta'
   });
 
-  overrideWithExtendInfo(`${START.succ}${text}${END}`, `\u001b[35m${text}${END}`);
+  overrideWithExtendInfo(`${START.info}${text}${END}`, `\u001b[35m${text}${END}`);
 });
 
 test('Simple overriding with extend()... 2/2', () => {
   extend({
     info: 'fuchsia'
   });
-
-  overrideWithExtendInfo(`${START.succ}${text}${END}`, `\u001b[38;5;201m${text}${END}`);
+  overrideWithExtendInfo(`${START.info}${text}${END}`, `\u001b[38;2;255;0;255m${text}${END}`);
 });
 
 test('Overriding with extend()', () => {
@@ -220,7 +226,7 @@ test('Overriding with extend()', () => {
   expect(nclr.warn).not.toBe(warn); //Overriden but becomes an anonymous function
   expect('warn' in theme).toBeTruthy();
   const initialWarn = `\u001b[38;5;214m${text}${END}`,
-    overrideWarn = `\u001b[38;5;214m\u001b[4m${text}\u001b[24m${END}`;
+    overrideWarn = `\u001b[38;2;255;165;0m\u001b[4m${text}\u001b[24m${END}`;
 
   const outWarn = stdout.inspectSync(() => process.stdout.write(theme.warn(text)));
   expect(outWarn).not.toStrictEqual([initialWarn]);
