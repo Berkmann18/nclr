@@ -1,3 +1,4 @@
+// const chalk = require('chalk');
 const nclr = require('../symbols');
 const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use } = nclr;
 const stdout = require('test-console').stdout,
@@ -14,12 +15,17 @@ const text = 'Hello',
     dbg: '\u001b[90m',
     out: '\u001b[36m\u001b[1m',
     inp: '\u001b[37m',
-    warn: '\u001b[38;2;255;165;0m',
+    warn: '\u001b[38;5;214m', //'\u001b[38;2;255;165;0m',
     quest: '\u001b[34m',
     error: '\u001b[31m',
     succ: '\u001b[32m'
   };
 
+// beforeEach(() => {
+//   // For the colored tests, enable chalk via its API.
+//   chalk.enabled = true;
+//   chalk.level = 4;
+// });
 
 test('info', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
@@ -56,6 +62,7 @@ test('inp', () => {
 test('warn', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.warn(text)));
   expect(output).toStrictEqual([`${START.warn}${text}${END}`]);
+  console.log('sym:warn', use('warn', text).replace(/\u001b/g, 'U'));
   const res = stdout.inspectSync(() => warn(text));
   expect(res).toStrictEqual([`${START.warn}${fig.warning} ${text}${END}\n`]);
   expect(warn(text)).toBeTruthy();
@@ -231,7 +238,7 @@ test('Simple overriding with extend()... 2/2', () => {
     }
   });
 
-  overrideWithExtendInfo(`${START.info}${fig.info} ${text}${END}`, `\u001b[38;5;201m${text}${END}`, `\u001b[38;5;201m${fig.info} ${text}${END}`);
+  overrideWithExtendInfo(`${START.info}${fig.info} ${text}${END}`, `\u001b[38;2;255;0;255m${text}${END}`, `\u001b[38;2;255;0;255m${fig.info} ${text}${END}`);
 });
 
 test('Overriding with extend()', () => {
