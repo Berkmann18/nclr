@@ -1,3 +1,4 @@
+// require('./test/test-chalk').inject();
 const chalk = require('chalk');
 const {log, use, isValidName, getTheme, theme, updateTheme, arrToFxChain} = require('./src/lib');
 
