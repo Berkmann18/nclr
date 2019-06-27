@@ -1,10 +1,9 @@
 const nclr = require('../symbols');
-const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use } = nclr;
+const {info, dbg, out, inp, warn, quest, error, succ, log, extend, use} = nclr;
 const stdout = require('test-console').stdout,
   fig = require('figures');
 
 const theme = nclr.getTheme();
-
 
 const text = 'Hello',
   END = '\u001b[39m',
@@ -19,7 +18,6 @@ const text = 'Hello',
     error: '\u001b[31m',
     succ: '\u001b[32m'
   };
-
 
 test('info', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
@@ -91,16 +89,18 @@ test('log', () => {
 });
 
 test('extend', () => {
-  expect(() => extend({
-    suc: 'magenta'
-  })).toThrowError('No \'styles\' or \'symbol\' property found for "suc"');
+  expect(() =>
+    extend({
+      suc: 'magenta'
+    })
+  ).toThrowError('No \'styles\' or \'symbol\' property found for "suc"');
 
   extend({
     suc: {
       styles: 'magenta',
       symbol: 'tick'
     }
-  })
+  });
   nclr.suc(text);
   expect('suc' in nclr).toBeTruthy();
   expect(typeof nclr.suc).toStrictEqual('function');
@@ -111,28 +111,30 @@ test('extend', () => {
 
 test('Illigal extend', () => {
   const myFx = () => console.log('Muhaha!');
-  const ext = () => extend({
-    [myFx]: {
-      styles: 'red',
-      symbol: 'cross'
-    }
-  });
+  const ext = () =>
+    extend({
+      [myFx]: {
+        styles: 'red',
+        symbol: 'cross'
+      }
+    });
   expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
 });
 
 test('Dangerous extend', () => {
   const harmless = (...evt) => console.log('harmless: This=', this, 'evt=', evt);
-  const myFx = (evt) => console.log('myFx: This=', this, 'evt=', evt);
-  const ext = () => extend({
-    [harmless(this, test)]: {
-      styles: 'green',
-      symbol: 'dot'
-    },
-    [myFx]: {
-      styles: 'red',
-      symbol: 'cross'
-    }
-  });
+  const myFx = evt => console.log('myFx: This=', this, 'evt=', evt);
+  const ext = () =>
+    extend({
+      [harmless(this, test)]: {
+        styles: 'green',
+        symbol: 'dot'
+      },
+      [myFx]: {
+        styles: 'red',
+        symbol: 'cross'
+      }
+    });
   expect(ext).toThrowError('Invalid extension key "undefined"');
 });
 
@@ -140,7 +142,7 @@ const testUse = (text, result) => {
   const res = stdout.inspectSync(() => log(use('info', text)));
   expect(res).toStrictEqual([result]);
   expect(use('info', text)).toStrictEqual(result);
-}
+};
 
 test('use', () => {
   const result = `${START.info}${text}${END}`;
@@ -149,7 +151,7 @@ test('use', () => {
   testUse(text, result);
 });
 
-const failedUse = ({ errMsg, name, text, result = `${START.info}${text}${END}` } = {}) => {
+const failedUse = ({errMsg, name, text, result = `${START.info}${text}${END}`} = {}) => {
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
   expect(output).toThrowError(errMsg);
   testUse(text, result);
@@ -175,7 +177,9 @@ test('use failed 2/2', () => {
 
 test('nested use()', () => {
   let result = `${START.info}${text} ${START.error}Error${START.info}${END}`;
-  const output = stdout.inspectSync(() => process.stdout.write(use('info', text, use('error', 'Error'))));
+  const output = stdout.inspectSync(() =>
+    process.stdout.write(use('info', text, use('error', 'Error')))
+  );
   expect(output).toStrictEqual([result]);
 });
 
@@ -220,7 +224,11 @@ test('Simple overriding with extend()... 1/2', () => {
     }
   });
 
-  overrideWithExtendInfo(`${START.info}${fig.info} ${text}${END}`, `\u001b[35m${text}${END}`, `\u001b[35m${fig.info} ${text}${END}`);
+  overrideWithExtendInfo(
+    `${START.info}${fig.info} ${text}${END}`,
+    `\u001b[35m${text}${END}`,
+    `\u001b[35m${fig.info} ${text}${END}`
+  );
 });
 
 test('Simple overriding with extend()... 2/2', () => {
@@ -231,7 +239,11 @@ test('Simple overriding with extend()... 2/2', () => {
     }
   });
 
-  overrideWithExtendInfo(`${START.info}${fig.info} ${text}${END}`, `\u001b[38;5;201m${text}${END}`, `\u001b[38;5;201m${fig.info} ${text}${END}`);
+  overrideWithExtendInfo(
+    `${START.info}${fig.info} ${text}${END}`,
+    `\u001b[38;5;201m${text}${END}`,
+    `\u001b[38;5;201m${fig.info} ${text}${END}`
+  );
 });
 
 test('Overriding with extend()', () => {

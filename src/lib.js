@@ -51,7 +51,8 @@ const updateTheme = () => {
  * @returns {boolean} Validity
  * @private
  */
-const isValidName = (data) => /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data) && data !== undefined && data !== 'undefined';
+const isValidName = data =>
+  /^[a-zA-Z_$][a-zA-Z_$0-9]*$/.test(data) && data !== undefined && data !== 'undefined';
 
 /**
  * @description Colourise something.
@@ -75,12 +76,12 @@ const use = (name, ...data) => {
  * @returns {function} Functional chain
  * @private
  */
-const arrToFxChain = (arr) => {
+const arrToFxChain = arr => {
   let chain = chalk;
   for (let i = 0; i < arr.length; ++i) {
-    chain = (arr[i] in chalk) ? chain[arr[i]] : chain.keyword(arr[i]);
+    chain = arr[i] in chalk ? chain[arr[i]] : chain.keyword(arr[i]);
   }
   return chain;
 };
 
-module.exports = { log, getTheme, updateTheme, theme, isValidName, use, arrToFxChain }
+module.exports = {log, getTheme, updateTheme, theme, isValidName, use, arrToFxChain};

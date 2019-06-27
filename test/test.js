@@ -1,9 +1,10 @@
-const nclr = require('../index');
-const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use } = nclr;
+require('./test-chalk').inject();
+const chalk = require('chalk');
+const nclr = require('../');
+const {info, dbg, out, inp, warn, quest, error, succ, log, extend, use} = nclr;
 const stdout = require('test-console').stdout;
 
 const theme = nclr.getTheme();
-
 
 const text = 'Hello',
   END = '\u001b[39m',
@@ -18,7 +19,6 @@ const text = 'Hello',
     error: '\u001b[31m',
     succ: '\u001b[32m'
   };
-
 
 test('info', () => {
   const output = stdout.inspectSync(() => process.stdout.write(theme.info(text)));
@@ -104,19 +104,21 @@ test('extend', () => {
 
 test('Illigal extend', () => {
   const myFx = () => console.log('Muhaha!');
-  const ext = () => extend({
-    [myFx]: 'red'
-  });
+  const ext = () =>
+    extend({
+      [myFx]: 'red'
+    });
   expect(ext).toThrowError(`Invalid extension key "${myFx}"`);
 });
 
 test('Dangerous extend', () => {
   const harmless = (...evt) => console.log('harmless: This=', this, 'evt=', evt);
-  const myFx = (evt) => console.log('myFx: This=', this, 'evt=', evt);
-  const ext = () => extend({
-    [harmless(this, test)]: 'green',
-    [myFx]: 'red'
-  });
+  const myFx = evt => console.log('myFx: This=', this, 'evt=', evt);
+  const ext = () =>
+    extend({
+      [harmless(this, test)]: 'green',
+      [myFx]: 'red'
+    });
   expect(ext).toThrowError('Invalid extension key "undefined"');
 });
 
@@ -124,7 +126,7 @@ const testUse = (text, result) => {
   const res = stdout.inspectSync(() => log(use('info', text)));
   expect(res).toStrictEqual([result]);
   expect(use('info', text)).toStrictEqual(result);
-}
+};
 
 test('use', () => {
   const result = `${START.info}${text}${END}`;
@@ -133,7 +135,7 @@ test('use', () => {
   testUse(text, result);
 });
 
-const failedUse = ({ errMsg, name, text, result = `${START.info}${text}${END}` } = {}) => {
+const failedUse = ({errMsg, name, text, result = `${START.info}${text}${END}`} = {}) => {
   const output = () => stdout.inspectSync(() => process.stdout.write(use(name, text)));
   expect(output).toThrowError(errMsg);
   testUse(text, result);
@@ -159,7 +161,9 @@ test('use failed 2/2', () => {
 
 test('nested use()', () => {
   let result = `${START.info}${text} ${START.error}Error${START.info}${END}`;
-  const output = stdout.inspectSync(() => process.stdout.write(use('info', text, use('error', 'Error'))));
+  const output = stdout.inspectSync(() =>
+    process.stdout.write(use('info', text, use('error', 'Error')))
+  );
   expect(output).toStrictEqual([result]);
 });
 

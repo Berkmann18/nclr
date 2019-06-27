@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const { log, use, isValidName, getTheme, theme, updateTheme, arrToFxChain } = require('./src/lib');
+const {log, use, isValidName, getTheme, theme, updateTheme, arrToFxChain} = require('./src/lib');
 
 console.log('level=', chalk.level, 'enabled=', chalk.enabled, 'TERM=', process.env.TERM);
 // chalk.enabled = true;
@@ -104,17 +104,17 @@ const succ = (...data) => log(theme.succ(data.join(' ')) + '\n');
  * data(42);
  * @throws {Error} Invalid extension key
  */
-const extend = (extension) => {
+const extend = extension => {
   for (let key in extension) {
     if (!isValidName(key)) throw new Error(`Invalid extension key "${key}"`);
     let clr = extension[key];
     if (Array.isArray(clr)) theme[key] = arrToFxChain(clr);
     else {
-      theme[key] = (clr in chalk) ? chalk[clr] : chalk.keyword(clr);
+      theme[key] = clr in chalk ? chalk[clr] : chalk.keyword(clr);
     }
     module.exports[key] = (...data) => log(theme[key](data.join(' ')) + '\n');
   }
   updateTheme();
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use, getTheme }
+module.exports = {error, info, dbg, out, inp, warn, quest, succ, log, extend, use, getTheme};

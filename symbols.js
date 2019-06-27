@@ -1,7 +1,7 @@
 const chalk = require('chalk'),
   fig = require('figures');
 
-const { log, use, isValidName, getTheme, theme, updateTheme, arrToFxChain } = require('./src/lib');
+const {log, use, isValidName, getTheme, theme, updateTheme, arrToFxChain} = require('./src/lib');
 
 console.log('level=', chalk.level, 'enabled=', chalk.enabled);
 chalk.enabled = true;
@@ -119,18 +119,20 @@ const succ = (...data) => log(theme.succ(fig.tick + ' ' + data.join(' ')) + '\n'
  * @throws {Error} Invalid extension key
  * @throws {Error} No <code>styles</code> or <code>symbol</code> property found
  */
-const extend = (extension) => {
+const extend = extension => {
   for (let key in extension) {
     if (!isValidName(key)) throw new Error(`Invalid extension key "${key}"`);
-    if (extension[key].styles === undefined || extension[key].symbol === undefined) throw new Error(`No 'styles' or 'symbol' property found for "${key}"`);
+    if (extension[key].styles === undefined || extension[key].symbol === undefined)
+      throw new Error(`No 'styles' or 'symbol' property found for "${key}"`);
     let clr = extension[key].styles;
     if (Array.isArray(clr)) theme[key] = arrToFxChain(clr);
     else {
-      theme[key] = (clr in chalk) ? chalk[clr] : chalk.keyword(clr);
+      theme[key] = clr in chalk ? chalk[clr] : chalk.keyword(clr);
     }
-    module.exports[key] = (...data) => log(theme[key](fig[extension[key].symbol] + ' ' + data.join(' ')) + '\n');
+    module.exports[key] = (...data) =>
+      log(theme[key](fig[extension[key].symbol] + ' ' + data.join(' ')) + '\n');
   }
   updateTheme();
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use, getTheme }
+module.exports = {error, info, dbg, out, inp, warn, quest, succ, log, extend, use, getTheme};
