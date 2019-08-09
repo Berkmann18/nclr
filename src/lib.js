@@ -1,4 +1,4 @@
-// require('../test/test-chalk').inject();
+require('../test/test-chalk').inject();
 const chalk = require('chalk');
 
 /**
