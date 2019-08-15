@@ -17,7 +17,7 @@
     "contribs:add": "all-contributors add",
     "contribs:generate": "all-contributors generate",
     "contribs:check": "all-contributors check",
-    "fmt": "prettier --write"
+    "fmt": "prettier --write *.js {src,test}/*.js"
   },
   "repository": {
     "type": "git",
@@ -96,7 +96,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run fmt",
+      "prettier --write",
       "eslint -c ./config/.eslintrc.js --fix",
       "git add",
       "jest --bail --findRelatedTests"
