@@ -44,7 +44,7 @@
     "figures": "^3.0.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^8.0.0",
     "@semantic-release/npm": "^6.0.0",
     "all-contributors-cli": "^6.7.0",
