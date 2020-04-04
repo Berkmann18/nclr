@@ -2,7 +2,8 @@
   "name": "nclr",
   "version": "2.1.0",
   "description": "Set of pre-defined coloured console logs",
-  "main": "index.js",
+  "main": "dist/main/index.js",
+  "browser": "dist/browser/index.js",
   "scripts": {
     "test": "snyk test && jest",
     "doc:lint": "documentation lint index.js",
@@ -17,7 +18,9 @@
     "contribs:add": "all-contributors add",
     "contribs:generate": "all-contributors generate",
     "contribs:check": "all-contributors check",
-    "fmt": "prettier --write *.js {src,test}/*.js"
+    "fmt": "prettier --write *.js {src,test}/*.js",
+    "build": "parcel build index.js symbols.js",
+    "start": "parcel index.js symbols.js"
   },
   "repository": {
     "type": "git",
@@ -58,6 +61,7 @@
     "husky": "^4.0.0",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.0",
+    "parcel": "^2.0.0-alpha.3.2",
     "prettier": "^1.18.2",
     "remark-cli": "^8.0.0",
     "remark-preset-lint-consistent": "^3.0.0",
@@ -78,8 +82,8 @@
     "testEnvironment": "node"
   },
   "engines": {
-    "node": ">= 7.0.0",
-    "npm": ">= 4.0.0"
+    "node": ">= 10.0.0",
+    "npm": ">= 6.0.0"
   },
   "config": {
     "commitizen": {
@@ -99,6 +103,27 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
+    }
+  },
+  "browserslist": [
+    "> 0.01% and not dead",
+    "last 2 versions",
+    "not ie < 11"
+  ],
+  "targets": {
+    "main": {
+      "engines": {
+        "node": ">= 10.0.0"
+      }
+    },
+    "browser": {
+      "engines": {
+        "browsers": [
+          "> 0.01% and not dead",
+          "last 2 versions",
+          "not ie < 11"
+        ]
+      }
     }
   }
 }
