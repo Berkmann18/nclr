@@ -1,3 +1,29 @@
+## [2.2.5](https://github.com/Berkmann18/nclr/compare/v2.2.4...v2.2.5) (2020-04-04)
+
+
+### Fix
+
+* Vulnerability fix ([4a2accf](https://github.com/Berkmann18/nclr/commit/4a2accf77072afe4b78633dd61b7d9be1bde7173))
+
+### Upgrade
+
+* Bump @semantic-release/changelog from 5.0.0 to 5.0.1 ([1bb2fde](https://github.com/Berkmann18/nclr/commit/1bb2fde61976ca3b15a43f1cad5fb780216d6d58))
+* Bump all-contributors-cli from 6.14.0 to 6.14.1 ([1eda87e](https://github.com/Berkmann18/nclr/commit/1eda87e92fb0a1cea5bb2d94b9d039ee296852c1))
+* Bump documentation from 12.1.4 to 12.2.0 ([74570b7](https://github.com/Berkmann18/nclr/commit/74570b7b618aeeb1c4961da51870bdd7ab57a455))
+* Bump eslint-plugin-node from 11.0.0 to 11.1.0 ([7dcccd1](https://github.com/Berkmann18/nclr/commit/7dcccd1b7e879baa22261d8e63957ae68a83e419))
+* Bump jest from 25.1.0 to 25.2.0 ([d55b368](https://github.com/Berkmann18/nclr/commit/d55b368e75ff46dbc20a32640b691aa81991d900))
+* Bump jest from 25.2.0 to 25.2.3 ([2abc6aa](https://github.com/Berkmann18/nclr/commit/2abc6aa424f9a42661001ddf70eb11ae784dc8f3))
+* Bump jest from 25.2.3 to 25.2.4 ([b289d96](https://github.com/Berkmann18/nclr/commit/b289d9616324874f3445962470602b6cbcfeac17))
+* Bump jest from 25.2.4 to 25.2.6 ([94c6cdf](https://github.com/Berkmann18/nclr/commit/94c6cdf4c1fdc2a9eefd25d36655f65a2fd990d8))
+* Bump lint-staged from 10.0.10 to 10.1.0 ([5afe29e](https://github.com/Berkmann18/nclr/commit/5afe29e4cb774bf5266da78bb194eaea587c863f))
+* Bump lint-staged from 10.0.9 to 10.0.10 ([bb0a6d3](https://github.com/Berkmann18/nclr/commit/bb0a6d39311c1936e3b0f962222fae39533dc2d6))
+* Bump lint-staged from 10.1.0 to 10.1.1 ([dd7ec7b](https://github.com/Berkmann18/nclr/commit/dd7ec7b21e606b3ca977e6bfc7600e720fc36153))
+* Bump remark-cli from 7.0.1 to 8.0.0 ([7878cf4](https://github.com/Berkmann18/nclr/commit/7878cf4914ecc3b0c700bc6a81431c530c54cf28))
+* Bump remark-preset-lint-consistent from 2.0.4 to 3.0.0 ([dbb9e96](https://github.com/Berkmann18/nclr/commit/dbb9e964a8df08551392b91a6022c161106156e6))
+* Bump remark-preset-lint-consistent from 2.0.4 to 3.0.0 ([75ef2fc](https://github.com/Berkmann18/nclr/commit/75ef2fc1c151d032da3491fd9a1a5dae6ef546e9))
+* Bump remark-preset-lint-recommended from 3.0.4 to 4.0.0 ([47396df](https://github.com/Berkmann18/nclr/commit/47396df71c5be2964cc813ef0d5c689f7e84ce23))
+* Bump snyk from 1.304.0 to 1.305.0 ([5aa9684](https://github.com/Berkmann18/nclr/commit/5aa9684788a86a77908943fe24565e7e04daf956))
+
 ## [2.2.4](https://github.com/Berkmann18/nclr/compare/v2.2.3...v2.2.4) (2020-03-25)
 
 
