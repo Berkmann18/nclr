@@ -2,8 +2,6 @@
   "name": "nclr",
   "version": "2.1.0",
   "description": "Set of pre-defined coloured console logs",
-  "main": "dist/main/index.js",
-  "browser": "dist/browser/index.js",
   "scripts": {
     "test": "snyk test && jest",
     "doc:lint": "documentation lint index.js",
@@ -112,11 +110,13 @@
   ],
   "targets": {
     "main": {
+      "distDir": "dist/main",
       "engines": {
         "node": ">= 10.0.0"
       }
     },
     "browser": {
+      "distDir": "dist/browser",
       "engines": {
         "browsers": [
           "> 0.01% and not dead",
