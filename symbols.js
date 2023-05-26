@@ -3,9 +3,10 @@ const chalk = require('chalk'),
 
 const { log, use, isValidName, getTheme, theme, updateTheme, arrToFxChain } = require('./src/lib');
 
-console.log('level=', chalk.level, 'enabled=', chalk.enabled);
+console.log('a level=', chalk.level, 'enabled=', chalk.enabled);
 chalk.enabled = true;
-chalk.level = 2;
+if (chalk.level <= 2) chalk.level = 4;
+// console.log('b level=', chalk.level, 'enabled=', chalk.enabled, 'TERM=', process.env.TERM);
 
 /**
  * @fileoverview Set of functions for coloured logs with symbols.
