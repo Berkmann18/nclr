@@ -1,6 +1,6 @@
-const clr = require('colors/safe');
-const theme = require('./src/theme'),
-  { log, use, isValidName, updateTheme, restoreTheme } = require('./src/lib');
+import clr from 'colors/safe';
+import theme from './src/theme';
+import { log, use, isValidName, updateTheme, restoreTheme } from './src/lib';
 
 /**
  * @fileoverview Set of functions for coloured logs.
@@ -111,4 +111,6 @@ const extend = (extension) => {
   updateTheme();
 };
 
-module.exports = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use, restore: restoreTheme }
+//TODO: Change this default export to a normal one when things are still working and the extension can be done without the import workaround
+const all = { error, info, dbg, out, inp, warn, quest, succ, log, extend, use, restore: restoreTheme }
+export default all;

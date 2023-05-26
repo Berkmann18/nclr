@@ -1,10 +1,11 @@
-const nclr = require('../symbols');
-const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use, restore } = nclr;
-const stdout = require('test-console').stdout,
-  fig = require('figures');
+import nclr from '../symbols';
+import requirePkg from '../src/require';
+import fig from 'figures';
+import clr from 'colors/safe';
+import theme from '../src/theme';
 
-const clr = require('colors/safe');
-const theme = require('../src/theme');
+const stdout = requirePkg('test-console').stdout;
+const { info, log, extend, use, restore } = nclr;
 clr.setTheme(theme);
 
 const text = 'Hello',

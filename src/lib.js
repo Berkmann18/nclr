@@ -1,5 +1,5 @@
-const clr = require('colors/safe');
-const theme = require('./theme');
+import clr from 'colors/safe';
+import theme from './theme';
 
 /**
  * @fileoverview Set of library functions for nclr.
@@ -59,4 +59,4 @@ const restoreTheme = () => {
   updateTheme();
 };
 
-module.exports = { log, updateTheme, isValidName, use, restoreTheme }
+export { log, updateTheme, isValidName, use, restoreTheme }

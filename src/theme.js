@@ -9,7 +9,7 @@
  * @type {{inp: string, out: string[], info: string, error: string, warn: string, dbg: string, quest: string}}
  * @protected
  */
-module.exports = {
+const theme = {
   inp: 'white', //input
   out: ['cyan', 'bold'], //Output
   info: 'cyan', //Information
@@ -19,3 +19,5 @@ module.exports = {
   quest: 'blue', //Question
   succ: 'green' //Success
 };
+
+export default theme;

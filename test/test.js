@@ -1,9 +1,10 @@
-const nclr = require('../index');
-const { info, dbg, out, inp, warn, quest, error, succ, log, extend, use, restore } = nclr;
-const stdout = require('test-console').stdout;
+import nclr from '../index';
+import clr from 'colors/safe';
+import theme from '../src/theme';
+import requirePkg from '../src/require';
 
-const clr = require('colors/safe');
-const theme = require('../src/theme');
+const stdout = requirePkg('test-console').stdout;
+const { info, log, extend, use, restore } = nclr;
 clr.setTheme(theme);
 
 const text = 'Hello',
